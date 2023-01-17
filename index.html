@@ -1,0 +1,162 @@
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<title>AJAX/PHP/CURL/JSON example</title>
+		<meta name="description" content="AJAX/PHP/CURL/JSON example">
+		<meta name="author" content="Paddy Evans">
+		<link rel="stylesheet" href="libs/css/data_style.css">
+
+	</head>
+
+	<body>
+			
+			<table class= "customTable">
+				<thead>
+					<tr>
+						<th>API name</th>
+						<th>API Description</th>
+						<th>Click here!</th>
+					</tr>
+				</thead>
+				
+
+				<tr>
+					<td>1. Ocean</td>
+					<td>
+						<select id="sellat">
+							<option value='40.78343'>Latitude</option>
+						</select>
+				
+						<select id="sellng">
+							<option value='-43.96625'>Longitude</option>
+						</select>
+						
+					</td>
+					<td><button id="btnRun1">Submit</button></td>
+
+
+				</tr>
+
+
+				<tr>
+				<td>2. Find Nearby Wikipedia</td>
+				<td>
+					<select id="selpostalcode">
+						<option value="8775">Postal Code</option>
+					</select>
+
+					<select id="selcountry">
+						<option value="CH">Country</option>
+					</select>
+
+					<select id="selradius">
+						<option value="10">Radius</option>
+					</select>
+
+					
+			
+					
+				</td>
+				<td><button id="btnRun2">Submit</button></td>
+
+
+			</tr>
+
+			--<tr>
+				<td>3. Country Info</td>
+				<td>
+					<select id="selCountry">
+						<option value="GB">Great Britain</option>
+						<option value="FR">France</option>
+					</select>
+			
+					<select id="selLanguage">
+						<option value="en">English</option>
+						<option value="fr">Francais</option>
+					</select>
+					
+				</td>
+				<td><button id="btnRun3">Submit</button></td>
+
+
+			</tr>
+
+			<tr>
+				<td>4. Wikipedia Search</td>
+				<td>
+					<select id="selq">
+						<option value="London">Place name</option>
+					</select>
+			
+					
+				</td>
+				<td><button id="btnRun4">Submit</button></td>
+
+
+			</tr>
+
+			<tr>
+				<td>5. Hierarchy</td>
+				<td>
+					<select id="selgeonameId">
+						<option value="2657896">Geoname ID</option>
+					</select>
+			
+					
+				</td>
+				<td><button id="btnRun5">Submit</button></td>
+
+
+			</tr>
+
+			
+			
+		
+
+
+        <div id="divResults">
+
+			<table class="customTable">
+				<thead>
+						<th>Results</th>
+				</thead>
+
+				<tr>
+				<thead>
+					<th>1. Ocean Name:</th>
+					<th>2. Feature:</th>
+					<th>3. Country Info:</th>
+					<th>4. Summary:</th>
+					<th>5. AsciiName:</th>
+					
+					
+
+			    </thead>
+
+				
+					<td id="txtName"></td>
+					<td id="txtFeature"></td>
+					<td id="txtCapital"></td>
+					<td id="txtSummary"></td>
+					<td id="txtAsciiName"></td>
+					
+
+				</tr>
+
+
+			</table>
+        </div>
+
+		
+
+		<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
+		<script type="application/javascript" src="libs/js/script.js"></script>
+
+	</body>
+
+</html>

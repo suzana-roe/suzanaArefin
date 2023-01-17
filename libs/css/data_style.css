@@ -1,0 +1,58 @@
+table.customTable {
+    border: 1px solid #248FD6;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    }
+    table.customTable td, table.customTable th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 2px;
+    }
+    table.customTable tbody td {
+    font-size: 13px;
+    }
+    table.customTable tr:nth-child(even) {
+    background: #D0E4F5;
+    }
+    table.customTable thead {
+    background: #238ACE;
+    background: -moz-linear-gradient(top, #5aa7da 0%, #3995d3 66%, #238ACE 100%);
+    background: -webkit-linear-gradient(top, #5aa7da 0%, #3995d3 66%, #238ACE 100%);
+    background: linear-gradient(to bottom, #5aa7da 0%, #3995d3 66%, #238ACE 100%);
+    border-bottom: 2px solid #FFFFFF;
+    }
+    table.customTable thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #D0E4F5;
+    }
+    table.customTable thead th:first-child {
+    border-left: none;
+    }
+    
+    table.customTable tfoot {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #D0E4F5;
+    background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    border-top: 2px solid #FFFFFF;
+    }
+    table.customTable tfoot td {
+    font-size: 14px;
+    }
+    table.customTable tfoot .links {
+    text-align: right;
+    }
+    table.customTable tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+    }
