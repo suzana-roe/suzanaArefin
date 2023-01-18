@@ -25,91 +25,80 @@
 				</thead>
 				
 
-				<tr>
+				<!--<tr>
 					<td>1. Ocean</td>
 					<td>
 						<select id="sellat">
-							<option value='40.78343'>latitude</option>
+							<option value='40.78343'>Latitude</option>
 						</select>
 				
 						<select id="sellng">
-							<option value='-43.96625'>longitude</option>
+							<option value='-43.96625'>Longitude</option>
 						</select>
 						
 					</td>
 					<td><button id="btnRun1">Submit</button></td>
 
 
-				</tr>
+				</tr>-->
 
 
 				<tr>
-				<td>2. Find Nearby Wikipedia</td>
+				<td>1. Find Nearby Wikipedia</td>
 				<td>
-					<select id="selpostalcode">
-						<option value="8775">Postal Code</option>
-					</select>
 
-					<select id="selcountry">
-						<option value="CH">Country</option>
-					</select>
-
-					<select id="selradius">
-						<option value="10">Radius</option>
-					</select>
+					<label for="">Postal Code:</label>
+					<input id="selpostalcode" value="" placeholder="8775"></input>
+					<label for="">Country:</label>
+					<input id="selcountry" value="" placeholder="CH"></input>
+					<label for="">Radius:</label>
+					<input id="selradius" value="" placeholder="10"></input>
 
 					
 			
 					
+				</td>
+				<td><button id="btnRun1">Submit</button></td>
+
+
+			</tr>
+
+			<tr>
+				<td>2. Country Info</td>
+				<td>
+
+					<label for="">Capital:</label>
+					<input id="selCountry" value="" placeholder="FR"></input>
+					<label for="">Language:</label>
+					<input id="selLanguage" value="" placeholder="en"></input>
 				</td>
 				<td><button id="btnRun2">Submit</button></td>
 
 
 			</tr>
 
-			--<tr>
-				<td>3. Country Info</td>
+			<tr>
+				<td>3. Wikipedia Search</td>
 				<td>
-					<select id="selCountry">
-						<option value="GB">Great Britain</option>
-						<option value="FR">France</option>
-					</select>
-			
-					<select id="selLanguage">
-						<option value="en">English</option>
-						<option value="fr">Francais</option>
-					</select>
+
+					<label for="">Place name:</label>
+					<input id="selq" value="" placeholder="Southwark"></input>
 					
 				</td>
 				<td><button id="btnRun3">Submit</button></td>
 
-
 			</tr>
 
 			<tr>
-				<td>4. Wikipedia Search</td>
+				<td>4. Hierarchy</td>
 				<td>
-					<select id="selq">
-						<option value="London">Place name</option>
-					</select>
+
+					<label for="">Geoname ID:</label>
+					<input id="selgeonameId" value="" placeholder="2657896"></input>
+
 			
-					
 				</td>
 				<td><button id="btnRun4">Submit</button></td>
-
-
-			</tr>
-
-			<tr>
-				<td>5. Hierarchy</td>
-				<td>
-					<select id="selgeonameId">
-						<option value="2657896">Geoname ID</option>
-					</select>
-			
-					
-				</td>
-				<td><button id="btnRun5">Submit</button></td>
 
 
 			</tr>
@@ -128,22 +117,20 @@
 
 				<tr>
 				<thead>
-					<th>1. Ocean Name:</th>
-					<th>2. Feature:</th>
-					<th>3. Country Info:</th>
-					<th>4. Summary:</th>
-					<th>5. AsciiName:</th>
+					<th>1. Feature:</th>
+					<th>2. Country Info:</th>
+					<th>3. Summary:</th>
+					<th>4. ToponymName:</th>
 					
 					
 
 			    </thead>
 
 				
-					<td id="txtName"></td>
 					<td id="txtFeature"></td>
 					<td id="txtCapital"></td>
 					<td id="txtSummary"></td>
-					<td id="txtAsciiName"></td>
+					<td id="txtToponymName"></td>
 					
 
 				</tr>

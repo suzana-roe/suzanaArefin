@@ -1,4 +1,4 @@
-	$('#btnRun1').click(function() {
+	/*$('#btnRun1').click(function() {
 
 		$.ajax({
 			url: "libs/php/getOcean.php",
@@ -25,9 +25,38 @@
 			}
 		}); 
 	
-	});
+	});*/
 
-	$('#btnRun2').click(function() {
+	/*$('#btnRun2').click(function() {
+
+		$.ajax({
+			url: "libs/php/getAstergdem.php",
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				lat: $('#selLat2').val(),
+				lng: $('#selLng2').val()
+			},
+			success: function(result) {
+
+				console.log(JSON.stringify(result));
+
+				if (result.status.name == "ok") {
+
+					$('#txtData').html(result['data'][0]['data']);
+
+
+				}
+			
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				// your error code
+			}
+		}); 
+	
+	});*/
+
+	$('#btnRun1').click(function() {
 
 		$.ajax({
 			url: "libs/php/getfindNearbyWikipedia.php",
@@ -58,7 +87,7 @@
 	
 	});
 
-	$('#btnRun3').click(function() {
+	$('#btnRun2').click(function() {
 
 		$.ajax({
 			url: "libs/php/getCountryInfo.php",
@@ -87,7 +116,7 @@
 	
 	});
 
-	$('#btnRun4').click(function() {
+	$('#btnRun3').click(function() {
 
 		$.ajax({
 			url: "libs/php/getwikipediaSearch.php",
@@ -116,7 +145,7 @@
 	
 	});
 
-	$('#btnRun5').click(function() {
+	$('#btnRun4').click(function() {
 
 		$.ajax({
 			url: "libs/php/gethierarchy.php",
@@ -132,7 +161,7 @@
 
 				if (result.status.name == "ok") {
 
-					$('#txtAsciiName').html(result['data'][0]['asciiName']);
+					$('#txtToponymName').html(result['data'][0]['toponymName']);
 
 
 				}
