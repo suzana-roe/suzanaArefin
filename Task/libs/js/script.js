@@ -56,7 +56,7 @@
 	
 	});*/
 
-	$('#btnRun1').click(function() {
+	/*$('#btnRun1').click(function() {
 
 		$.ajax({
 			url: "libs/php/getfindNearbyWikipedia.php",
@@ -85,7 +85,7 @@
 			}
 		}); 
 	
-	});
+	});*/
 
 	$('#btnRun2').click(function() {
 
