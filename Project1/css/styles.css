@@ -19,7 +19,6 @@ html, body, #map {
   float: top;
   z-index: 2;
   background-color: #4e4d4d;
-  
   pointer-events: auto;   
 }
 
@@ -34,6 +33,7 @@ h3 {
 #selCountry{
   margin-left: .5rem;
 }
+
 #btnRun{
   margin-left: .5rem;
   background-color: #f8f9f7;
@@ -48,7 +48,6 @@ h3 {
   font-weight: bold;
 
 }
-
 
 #btnReset{
   margin-left: .5rem;
@@ -102,17 +101,6 @@ button {
   padding-top: 20px;
 }
 
-#nav-weather{
-  padding-top: 40px;
-  /*padding-left: 20px;*/
-}
-
-#nav-wikiPlaces {
- /* padding-left: 20px;*/
-  padding-top: 20px;
-}
-
-
 #txtHeadlineTitle {
   font-weight: bold;
   color: rgb(6, 6, 6);
@@ -141,31 +129,11 @@ button {
   color: black;
 }
 
-
-/* Wikiplaces Style */
-
-#wikiPlaces {
-  padding-left: 15px;
-}
-
-
 /* General Info Style */
 
 #nav-generalInfo {
   color: rgb(8, 8, 8);
 }
-
-
-/*weather section styles*/
-
-#txtCapitalWeatherHi, #txtCapitalWeatherFHi{
-  color: rgb(5, 5, 5);
-}
-
-#txtCapitalWeatherLo, #txtCapitalWeatherFLo{
-  color: rgb(5, 5, 5)1, 1, 1);
-}
-
 
 
 /* Footer */
@@ -192,15 +160,9 @@ button {
 
 }
 
-
 .menuContent {
   padding-left: 50px;
 }
-
-#txtWikiImg {
-  padding-left: 30px;
-}
-
 
 #exampleModal2 {
   height: 400px;

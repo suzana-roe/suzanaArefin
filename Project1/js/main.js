@@ -15,7 +15,7 @@ let popup;
 var map = L.map('map').setView([36.138287, -96.110367], 3.5);
 
 
-//osm tile layer
+//open street map tile layer
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -23,7 +23,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 
-// A more programatically way to build the countries <select> list
+// Building the countries <select> list
 $.ajax({
 	url: "./php/geoJson.php",
 	type: 'POST',
@@ -85,7 +85,7 @@ const errorCallback = (error) => {
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 
-// adding borders to our map
+// adding borders to the map
 $('#selCountry').on('change', function() {
 let countryCode = $('#selCountry').val();
 let countryOptionText= $('#selCountry').find('option:selected').text();
@@ -183,66 +183,15 @@ $.ajax({
                         console.log(textStatus, errorThrown);
                     }
                 });
-
-
-//openWeather API          
-$.ajax({
-    url: "./php/modal/openWeatherCurrent.php",
-    type: 'POST',
-    dataType: 'json',
-    data: {
-        capital: capitalCityWeather,
-    }, 
-    success: function(result) {
-        console.log('CurrentCapitalWeather', result);
-        capitalCityLat = result.weatherData.coord.lat;
-        capitalCityLon = result.weatherData.coord.lon;
-        
-        if (result.status.name == "ok") {
-
-            $('#txtCapitalWeatherCurrent').html('&nbsp;&nbsp;&nbsp;&nbsp;Today: &nbsp;&nbsp;'+ result.weatherData.weather[0].description +'&nbsp;&nbsp; || &nbsp;&nbsp; current temp: &nbsp;' + result.weatherData.main.temp +'&#8451<br>');
-            $('#txtCapitalWeatherLo').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low: ' + result.weatherData.main.temp_min +'&#8451<br>');
-            $('#txtCapitalWeatherHi').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High: ' + result.weatherData.main.temp_max +'&#8451<br>');
-            
-            
-// wiki places of interest
-            $.ajax({
-                url: "./php/wikiPlaces.php",
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    lat: capitalCityLat,
-                    lng: capitalCityLon
-                },
-                success: function(result) {
-                    console.log('wikiPlaces Data',result);
-                    $('#wikiPlaces').html("");
-                    if (result.status.name == "ok") {
-                        for (var i=0; i<result.wikiPlaces.length; i++) {
-                            $("#wikiPlaces").append('<li><a href=https://'+result.wikiPlaces[i].wikipediaUrl+'>'+ result.wikiPlaces[i].title +'</a></li>' 
-                            )}
-                            }
-                
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
         }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-    }
-});              
-}
-},
-error: function(jqXHR, textStatus, errorThrown) {
-console.log(textStatus, errorThrown);
-}  
-}); 
+    });
 });
 
-// New event for map click
+//New event for map click
 map.on('click', function(e) {        
     var popLocation = e.latlng;
     $.ajax({
