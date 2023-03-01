@@ -16,11 +16,7 @@
 
  
 
-<<<<<<< HEAD
     $countryBorders = json_decode(file_get_contents("../json/countryBorders.geo.json"), true);
-=======
-    $countryBorders = json_decode(file_get_contents("../json/countries_large.geo.json"), true);
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 
  
 
@@ -32,11 +28,7 @@
 
  
 
-<<<<<<< HEAD
         if ($feature["properties"]["iso_a2"] ==  strtoupper($_REQUEST['countryCode'])) {
-=======
-        if ($feature["properties"]["ISO_A3"] ==  $_REQUEST['countryCode']) {
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 
  
 
@@ -51,12 +43,7 @@
         
 
     }
-<<<<<<< HEAD
     echo json_encode($border);
-=======
-
- 
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 
     // get API data
 
@@ -66,11 +53,7 @@
 
  
 
-<<<<<<< HEAD
     /*$url='http://api.geonames.org/countryInfoJSON?formatted=true&lang=' . $_REQUEST['lang'] . '&country=' . $_REQUEST['country'] . '&username=suzana.arefin&style=full';
-=======
-    $url='http://api.geonames.org/countryInfoJSON?formatted=true&lang=' . $_REQUEST['lang'] . '&country=' . $_REQUEST['country'] . '&username=suzana.arefin&style=full';
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 
  
 
@@ -122,11 +105,7 @@
 
  
 
-<<<<<<< HEAD
     echo json_encode($output);*/
-=======
-    echo json_encode($output);
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 
  
 
