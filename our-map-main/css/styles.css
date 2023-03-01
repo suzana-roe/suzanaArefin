@@ -1,0 +1,328 @@
+html,
+body,
+#map {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+#map {
+  float: left;
+  z-index: 1;
+  position: relative;
+}
+
+.overlay2 {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  float: top;
+  z-index: 2;
+  /* background-color: #d5fecf; */
+
+  pointer-events: auto;
+}
+
+.leaflet-control-container {
+  position: absolute;
+  top: 65px;
+}
+
+h3 {
+  padding-left: 1rem;
+}
+#selCountry {
+  margin-left: 0.5rem;
+  padding: 9px;
+  border: solid 1px #517b97;
+  outline: 0;
+  color: #ffffff;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left 25,
+    from(black),
+    color-stop(4%, #125fb2),
+    to(black)
+  );
+}
+#btnRun {
+  margin-left: 0.5rem;
+  background-color: #d5fecf;
+  border: 1px solid #d5fecf;
+  font-weight: bold;
+}
+
+#btnHelp {
+  margin-left: 0.5rem;
+  background-color: #d5fecf;
+  border: none;
+  font-weight: bold;
+}
+
+#btnReset {
+  margin-left: 0.5rem;
+  background-color: #d5fecf;
+  border: 1px solid #d5fecf;
+  font-weight: bold;
+}
+
+/* Info container section styles*/
+
+/* Header */
+
+.modal-title {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.modal-body {
+  height: 70vh;
+
+  overflow-y: auto;
+
+  /*background-color: #d5fecf;*/
+}
+
+/* ------------------- botones ------------------ */
+
+button {
+  padding: 0;
+  width: 32px;
+  height: 37px;
+  line-height: 0px;
+}
+
+/* fichas */
+#nav-covid {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+#nav-currency {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+#nav-generalInfo {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+#nav-home {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+#nav-weather {
+  padding-top: 40px;
+  /*padding-left: 20px;*/
+}
+
+#nav-wikiPlaces {
+  /* padding-left: 20px;*/
+  padding-top: 20px;
+}
+
+#nav-news {
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+#txtCovidDeaths {
+  font-weight: bold;
+  animation: blinkingTextRed 0.9s infinite;
+}
+
+#txtCovidDeathRate {
+  animation: blinkingTextRed 0.9s infinite;
+}
+
+#txtHeadlineTitle {
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+.nav-link {
+  color: black;
+}
+
+a{
+  color: black !important;
+}
+
+.modal {
+  /* background-color: #517b97; */
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: #517b97;
+}
+
+.modal-body a {
+  color: black;
+}
+
+.modal-body a:hover {
+  color: black;
+}
+
+/* News Style */
+
+#nav-news {
+  padding-left: 15px;
+}
+
+/* Wikiplaces Style */
+
+#wikiPlaces {
+  padding-left: 15px;
+}
+
+/* Covid styles */
+
+#txtCovidCases,
+#txtCovidRecovered,
+#txtCovidCritical {
+  color: black;
+}
+
+/* General Info Style */
+
+#nav-generalInfo {
+  color: black;
+}
+
+/* Currency Style */
+
+#nav-currency {
+  color: black;
+}
+
+/*weather section styles*/
+
+#txtCapitalWeatherCurrent,
+#txtCapitalWeatherForcast {
+  font-weight: bold;
+  color: black;
+}
+
+#txtCapitalWeatherHi,
+#txtCapitalWeatherFHi {
+  color: red;
+}
+
+#txtCapitalWeatherLo,
+#txtCapitalWeatherFLo {
+  color: blue;
+}
+
+/* Footer */
+
+#btnClose {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  line-height: 0px;
+  background-color: #d5fecf;
+  border: none;
+}
+
+.btn-close {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  line-height: 0px;
+  background-color: #d5fecf;
+  border: none;
+}
+
+#issInfoBanner {
+  visibility: hidden;
+  font-weight: bold;
+  margin-left: 50px;
+  text-align: center;
+  animation: blinkingText 1.2s infinite;
+}
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: #000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+}
+@keyframes blinkingTextRed {
+  0% {
+    color: #ff0000;
+  }
+  49% {
+    color: #ff0000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
+
+.menuContent {
+  padding-left: 50px;
+}
+
+#txtWikiImg {
+  padding-left: 30px;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background: #d6fed0;
+  color: #000000;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 6px;
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+  color: rgba(255, 255, 255, 0.1);
+}
+.custom-popup .leaflet-popup-tip-container {
+  width: 30px;
+  height: 15px;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: #d6fed0;
+}
+
+#exampleModal2 {
+  height: 400px;
+}
+
+.leaflet-control-scale-line {
+  position: relative;
+  z-index: 35;
+}
+
+.leaflet-control-zoom {
+  position: absolute;
+}

@@ -1,0 +1,173 @@
+html, body, #map {
+  height:100%;
+  width:100%;
+  padding:0px;
+  margin:0px;
+}
+
+#map {
+  float: left;
+  z-index: 1;
+  position: relative;     
+}
+
+.overlay2 {
+  
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  float: top;
+  z-index: 2;
+  background-color: #4e4d4d;
+  pointer-events: auto;   
+}
+
+.leaflet-control-container { 
+  position: absolute; 
+  top: 65px;
+} 
+
+h3 {
+  padding-left: 1rem;
+}
+#selCountry{
+  margin-left: .5rem;
+}
+
+#btnRun{
+  margin-left: .5rem;
+  background-color: #f8f9f7;
+  border: 1px solid #f6f7f6;
+  font-weight: bold;
+}
+
+#btnHelp {
+  margin-left: .5rem;
+  background-color: #f9fbf8;
+  border: none;
+  font-weight: bold;
+
+}
+
+#btnReset{
+  margin-left: .5rem;
+  background-color: #fcfcfc;
+  border: 1px solid #f6fbf6;
+  font-weight: bold;
+}
+
+  /* Info container section styles*/
+
+  /* Header */
+
+.modal-title {
+  color: rgb(8, 8, 8);
+  text-align: center;
+  font-weight: bold;
+}
+
+.modal-body {
+
+  height: 70vh;
+
+  overflow-y: auto;
+
+  /*background-color: #d5fecf;*/
+
+}
+
+
+/* ------------------- botones ------------------ */
+
+button {
+  padding: 0;
+  width: 32px;
+  height: 37px;
+  line-height: 0px;
+}
+
+
+
+
+/* fichas */
+#nav-generalInfo {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+#nav-home {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+#txtHeadlineTitle {
+  font-weight: bold;
+  color: rgb(6, 6, 6);
+  text-align: center;
+}
+
+
+
+.nav-link {
+  color: rgb(4, 4, 4);
+}
+
+.modal {
+  background-color: transparent;
+}
+
+.modal-header, .modal-body, .modal-footer {
+  background-color: #919491;
+}
+
+.modal-body a {
+  color: rgb(60, 58, 58);
+}
+
+.modal-body a:hover {
+  color: black;
+}
+
+/* General Info Style */
+
+#nav-generalInfo {
+  color: rgb(8, 8, 8);
+}
+
+
+/* Footer */
+
+#btnClose {
+  
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    line-height: 0px;
+    background-color: #fefefd;
+    border: none;
+}
+
+.btn-close {
+  
+  
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    line-height: 0px;
+    background-color: #fbfcfb;
+    border: none;
+
+}
+
+.menuContent {
+  padding-left: 50px;
+}
+
+#exampleModal2 {
+  height: 400px;
+}
+
+
+
+
