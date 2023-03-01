@@ -192,6 +192,7 @@ function getLocationPermission() {
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 
+//adding borders to the map
 
 //adding borders to the map
 
