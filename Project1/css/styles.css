@@ -293,7 +293,6 @@ a{
 
 #txtWikiImg {
   padding-left: 30px;
-<<<<<<< HEAD
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
@@ -326,36 +325,6 @@ a{
 
 .leaflet-control-zoom {
   position: absolute;
-=======
-}
-
-.custom-popup .leaflet-popup-content-wrapper {
-  background: #d6fed0;
-  color: #000000;
-  font-size: 14px;
-  line-height: 24px;
-  border-radius: 6px;
-}
-.custom-popup .leaflet-popup-content-wrapper a {
-  color: rgba(255, 255, 255, 0.1);
-}
-.custom-popup .leaflet-popup-tip-container {
-  width: 30px;
-  height: 15px;
-}
-
-.custom-popup .leaflet-popup-tip {
-  background: #d6fed0;
-}
-
-#exampleModal2 {
-  height: 400px;
-}
-
-.leaflet-control-scale-line {
-  position: relative;
-  z-index: 35;
->>>>>>> acbb3cebcde973522ec912d3c1979663d3517b07
 }
 
 .leaflet-control-zoom {
