@@ -358,7 +358,13 @@ L.easyButton(
           console.log("data", data);
           var markers = L.markerClusterGroup();
           data["response"].forEach((airport) => {
-            const marker = L.marker([airport.lat, airport.lng])
+            const airportMarker = L.ExtraMarkers.icon({
+              icon: 'fas fa-plane',
+              markerColor: 'red',
+              shape: 'circle',
+              //prefix: 'fas'
+            });
+            const marker = L.marker([airport.lat, airport.lng], {icon:airportMarker})
             MarkersList.push(marker)
             markers.addLayer(marker)
             //marker.addTo(map);
@@ -400,15 +406,13 @@ L.easyButton(
           .then((data) => {
             var markers = L.markerClusterGroup();
             data.forEach((place) => {
-              const myIcon = L.icon({
-                iconUrl: "img/landmark-marker.png",
-                iconSize: [50, 50],
-                iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
+              const PlaceMarker = L.ExtraMarkers.icon({
+                icon: 'fas fa-landmark',
+                markerColor: 'green',
+                shape: 'square',
+                //prefix: 'fas'
               });
-              const marker = L.marker([place.lat, place.lon], {
-                icon: myIcon,
-              })
+              const marker = L.marker([place.lat, place.lon], {icon:PlaceMarker})
               MarkersList.push(marker)
               markers.addLayer(marker)
               //marker.addTo(map);
@@ -485,15 +489,15 @@ L.easyButton(
       data: {},
       success: function (result) {
         console.log("deaths: ", result.deaths);
-        $("#txtCovidDeaths").html("Deaths: " + result.deaths + "<br>");
+        $("#txtCovidDeaths").html("" + result.deaths + "<br>");
         $("#txtCovidCases").html(
-          "Total Registered Cases: " + result.cases + "<br>"
+          " " + result.cases + "<br>"
         );
         $("#txtCovidRecovered").html(
-          "Recoveries: " + result.recovered + "<br>"
+          " " + result.recovered + "<br>"
         );
         $("#txtCovidCritical").html(
-          "Critical Patients: " + result.critical + "<br>"
+          " " + result.critical + "<br>"
         );
         $("#txtCovidDeathRate").html(
           "<strong>Death rate: " + result.oneDeathPerPeople + " %</strong><br>"
@@ -529,21 +533,38 @@ L.easyButton(
             capitalCityLat = result.weatherData.coord.lat;
             capitalCityLon = result.weatherData.coord.lon;
 
+            $("#HeadlineTitle").html(result.weatherData.name + "&nbsp;" + "Weather Today" + "<br>");
+            console.log(result.weatherData.name);
             $("#txtCapitalWeatherCurrent").html(
-              "&nbsp;&nbsp;&nbsp;&nbsp;Today: &nbsp;&nbsp;" +
-              result.weatherData.weather[0].description +
-              "&nbsp;&nbsp; || &nbsp;&nbsp; current temp: &nbsp;" +
+              "&nbsp;&nbsp;" +
+              result.weatherData.weather[0].description + "<br>" +
+              "&nbsp;&nbsp;" +
               result.weatherData.main.temp +
               "&#8451<br>"
             );
+            $("#feelsLike").html(
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
+              result.weatherData.main.feels_like +
+              "&#8451<br>"
+            );
             $("#txtCapitalWeatherLo").html(
-              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low: " +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
               result.weatherData.main.temp_min +
               "&#8451<br>"
             );
             $("#txtCapitalWeatherHi").html(
-              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High: " +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
               result.weatherData.main.temp_max +
+              "&#8451<br>"
+            );
+            $("#humidity").html(
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
+              result.weatherData.main.humidity +
+              "&#8451<br>"
+            );
+            $("#pressure").html(
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
+              result.weatherData.main.pressure +
               "&#8451<br>"
             );
           },
@@ -668,7 +689,7 @@ L.easyButton(
                 console.log("exchange: ", result.status);
                 exchangeRate = result.exchangeRate.rates[currencyCode];
                 $("#txtRate").html(
-                  "Ex. Rate: <strong>" +
+                  "Exchange Rate: <strong>" +
                   exchangeRate.toFixed(3) +
                   "</strong> " +
                   currencyCode +
