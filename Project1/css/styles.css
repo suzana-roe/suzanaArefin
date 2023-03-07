@@ -46,6 +46,8 @@ h3 {
     color-stop(4%, #125fb2),
     to(black)
   );
+  color: white; 
+  background-color: black;
 }
 #btnRun {
   margin-left: 0.5rem;
@@ -68,6 +70,12 @@ h3 {
   font-weight: bold;
 }
 
+#btnClose img {
+  height: 30px; 
+  width: 30px;
+}
+
+
 /* Info container section styles*/
 
 /* Header */
@@ -84,6 +92,20 @@ h3 {
   overflow-y: auto;
 
   /*background-color: #d5fecf;*/
+}
+
+.modal-content {
+  background-color: #517b97; 
+  color: black !important;
+}
+
+.modal-header {
+  background-color: #517b97; 
+  color: black !important;
+}
+
+.modal-title {
+  color: black !important;
 }
 
 /* ------------------- botones ------------------ */
@@ -117,6 +139,10 @@ button {
 #nav-home {
   padding-left: 20px;
   padding-top: 20px;
+}
+
+#nav-tab {
+  color: black !important;
 }
 
 #nav-weather {
@@ -173,6 +199,15 @@ a{
 
 .modal-body a:hover {
   color: black;
+}
+
+.modal-body {
+  background-color: #517b97; 
+  color: black !important;
+}
+
+.modal-body nav {
+  color: black !important;
 }
 
 /* News Style */
@@ -329,4 +364,38 @@ a{
 
 .leaflet-control-zoom {
   position: absolute;
+}
+
+#selCountry {
+  margin-left: 0.5rem;
+  padding: 9px;
+  border: solid 1px #517b97;
+  outline: 0;
+  color: #ffffff;
+  background: -webkit-gradient(linear,
+      left top,
+      left 25,
+      from(black),
+      color-stop(4%, #125fb2),
+      to(black));
+}
+
+.newsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px black groove;
+  padding: 10px;
+  text-align: center;
+}
+
+.news-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.news-info-item {
+  margin-top: 20px;
+  flex: 50%;
 }

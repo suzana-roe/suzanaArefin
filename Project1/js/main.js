@@ -357,6 +357,7 @@ L.easyButton(
         .then((data) => {
           console.log("data", data);
           var markers = L.markerClusterGroup();
+
           data["response"].forEach((airport) => {
             const airportMarker = L.ExtraMarkers.icon({
               icon: 'fas fa-plane',
@@ -364,8 +365,9 @@ L.easyButton(
               shape: 'circle',
               //prefix: 'fas'
             });
+
             const marker = L.marker([airport.lat, airport.lng], {icon:airportMarker})
-            MarkersList.push(marker)
+            MarkersList.push(markers)
             markers.addLayer(marker)
             //marker.addTo(map);
             marker.bindPopup(`${airport.name} (${airport.iata_code})`);
@@ -413,7 +415,7 @@ L.easyButton(
                 //prefix: 'fas'
               });
               const marker = L.marker([place.lat, place.lon], {icon:PlaceMarker})
-              MarkersList.push(marker)
+              MarkersList.push(markers)
               markers.addLayer(marker)
               //marker.addTo(map);
               marker.bindPopup(`${place.display_name}`);
