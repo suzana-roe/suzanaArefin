@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gazetteer</title>
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
   <link rel="stylesheet" type="text/css" href="./bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./Leaflet/leaflet.css">
   <link rel="stylesheet" type="text/css" href="./Leaflet.EasyButton-master/src/easy-button.css">
@@ -29,9 +29,9 @@
   <div class="overlay2">
     <nav class="navbar navbar-light d-flex justify-content-end">
 
-      <select name="sel-country" id="selCountry"></select>
+      <select class="form-select" name="sel-country" id="selCountry"></select>
 
-      <p id="issInfoBanner">"T" = Toggle view on/off ISS</p>
+
 
     </nav>
   </div>
@@ -60,14 +60,18 @@
 
             </div>
           </nav>
+          
+          
           <div class="tab-content" id="nav-tabContent">
+
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
               <span id="txtWikiImg"></span>
               <br>
               <span id="txtWiki"></span>
 
             </div>
-            <div class="tab-pane fade" id="nav-generalInfo" role="tabpanel" aria-labelledby="nav-generalInfo-tab">
+
+            <!--<div class="tab-pane fade" id="nav-generalInfo" role="tabpanel" aria-labelledby="nav-generalInfo-tab">
               <span id=txtCapital></span>
               <span id=txtAreaInSqKm></span>
               <span id=txtContinent></span>
@@ -75,13 +79,65 @@
               <span id=txtLanguages></span>
 
 
-            </div>
+            </div>-->
+
+        <div class="tab-pane fade" id="nav-generalInfo" role="tabpanel" aria-labelledby="nav-generalInfo-tab">
+            <table class="table table-striped table-fixed">
+              <tbody>
+                <tr>
+                  <td class="col-2 table-entry"></td>
+                  <td class="col-4 table-entry table-label">Capital</td>
+                  <td class="col-6 table-entry table-data" id="txtCapital"></td>
+                </tr>
+                <tr>
+                  <td class="col-2 table-entry"></td>
+                  <td class="col-4 table-entry table-label">Area</td>
+                  <td class="col-6 table-entry table-data" id="txtAreaInSqKm"></td>
+                </tr>
+                <tr>
+                  <td class="col-2 table-entry"></td>
+                  <td class="col-4 table-entry table-label">Continent</td>
+                  <td class="col-6 table-entry table-data" id="txtContinent"></td>
+                </tr>
+                <tr>
+                  <td class="col-2 table-entry"></td>
+                  <td class="col-4 table-entry table-label">Population</td>
+                  <td class="col-6 table-entry table-data" id="txtPopulation"></td>
+                </tr>
+                <tr>
+                  <td class="col-2 table-entry"></td>
+                  <td class="col-4 table-entry table-label">Languages</td>
+                  <td class="col-6 table-entry table-data" id="txtLanguages"></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
 
 
             <div class="tab-pane fade" id="nav-currency" role="tabpanel" aria-labelledby="nav-currency-tab">
-              <span id="txtCurrency"></span>
+              <!--<span id="txtCurrency"></span>
               <span id="txtCurrencyCode"></span>
-              <span id="txtRate"></span>
+              <span id="txtRate"></span>-->
+
+              <table class="table table-striped table-fixed">
+                <tbody>
+                  <tr>
+                    <td class="col-2 table-entry"></td>
+                    <td class="col-4 table-entry table-label">Currency</td>
+                    <td class="col-6 table-entry table-data" id="txtCurrency"></td>
+                  </tr>
+                  <tr>
+                    <td class="col-2 table-entry"></td>
+                    <td class="col-4 table-entry table-label">Code</td>
+                    <td class="col-6 table-entry table-data" id="txtCurrencyCode"></td>
+                  </tr>
+                  <tr>
+                    <td class="col-2 table-entry"></td>
+                    <td class="col-4 table-entry table-label">Rate</td>
+                    <td class="col-6 table-entry table-data" id="txtRate"></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
 
@@ -93,8 +149,7 @@
       </div>
     </div>
   </div>
-
-
+</div>
   <!-- ON CLICK MODAL (COVID INFO, HOLIDAYS, TEMEPRATURE, NEWS) -->
 
   <div class="modal fade" id="coronaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,10 +160,10 @@
           <button type="button" id="btnClose" class="btn btn-secondary" data-bs-dismiss="modal"><img src="./img/off.png" /></button>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body modal-body-table">
 
-          <table class="table table-striped table-hover">
-            <tbody class="tab-pane" id="nav-covid" role="tabpanel" aria-labelledby="nav-covid-tab">
+          <table class="table table-striped table-fixed">
+            <tbody>
               <tr>
                 <td><i class="fas fa-clipboard-list fa-lg covid-icon-color"></i></td>
                 <td>Total cases</td>
@@ -173,32 +228,45 @@
 
         <div class="modal-body">
 
-          <div class="tab-pane" id="nav-weather" role="tabpanel" aria-labelledby="nav-weather-tab">
-            <h4 id="HeadlineTitle"></h4>
-            <span id="txtCapitalWeatherCurrent"></span>
+          <div class="container" id="wrapper">
+            <div class="container-fluid" id="current-weather">
+              <div class="row">
+                
+       <!-- Right panel -->
+       <div class="col-md-4 col-sm-5">
+        <h5><span id="HeadlineTitle"></span></h5>
+          
+      </div>
 
-            <br>
-            <br>
+      <!-- Center panel -->
+      <div class="col-md-5 col-sm-7" style="margin: 10px auto;padding:0;">
+        <div class="row">
+          <div>
+            <i class="fas fa-cloud-sun-rain fa-2x"></i>
+            <span style="font-size: 1.5rem; color: white;" id="txtCapitalWeatherCurrent"></span>
+            
+        </div>
+          
+        </div>
+      </div>
 
-          </div>
-
-          <table class="table table-sm id="nav-weather" role="tabpanel" aria-labelledby="nav-weather-tab">
-            <tr>
-              <td>Feels Like</td> <td id ="feelsLike"></td>
-            </tr>
-            <tr>
-              <td>Max temp</td> <td id="txtCapitalWeatherHi"></td>
-            </tr>
-            <tr>
-              <td>Min temp</td> <td id="txtCapitalWeatherLo"></td>
-            </tr>
-            <tr>
-              <td>Humidity</td> <td id="humidity"></td>
-            </tr>
-            <tr>
-              <td>Pressure</td> <td id = "pressure"></td>
-            </tr>
-          </table>
+           <!-- Left panel -->
+      <div class="col-xs-12 col-sm-12 col-md-3 row" style="text-align: right;">
+        <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+          <h6>Humidity:<spam id="humidity"></spam></h6>
+        </div>
+        <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+          <h6>Pressure:<spam id="pressure"></spam></h6>
+        </div>
+        <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+          <h6>Wind:<spam id="wind"></spam></h6>
+        </div>
+       
+      </div>
+      
+    </div>
+  </div>
+          
 
         </div>
 
@@ -216,9 +284,11 @@
   <script src="./fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
   <script src="./leafletawesomemarker/dist/js/leaflet.extra-markers.min.js"></script>
   <script src="./jquery/jquery-3.5.1.min.js" type="application/javascript"></script>
+  <script type="text/javascript" src="./js/date.js"></script>
 
   <script src="./Leaflet.EasyButton-master/src/easy-button.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/numeral.min.js"></script>
 
 
 

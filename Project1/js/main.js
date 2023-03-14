@@ -65,7 +65,8 @@ var dark = L.tileLayer(mapboxUrl, {
   attribution: mapboxAttribution,
   accessToken: token,
 }),
-  streets = L.tileLayer(mapboxUrl, {
+
+streets = L.tileLayer(mapboxUrl, {
     id: "mapbox/streets-v11",
     tileSize: 512,
     zoomOffset: -1,
@@ -80,6 +81,7 @@ outdoors = L.tileLayer(mapboxUrl, {
   attribution: mapboxAttribution,
   accessToken: token,
 });
+
 light = L.tileLayer(mapboxUrl, {
   id: "mapbox/light-v10",
   tileSize: 512,
@@ -87,6 +89,7 @@ light = L.tileLayer(mapboxUrl, {
   attribution: mapboxAttribution,
   accessToken: token,
 });
+
 satellite = L.tileLayer(mapboxUrl, {
   id: "mapbox/satellite-v9",
   tileSize: 512,
@@ -94,6 +97,7 @@ satellite = L.tileLayer(mapboxUrl, {
   attribution: mapboxAttribution,
   accessToken: token,
 });
+
 satStreets = L.tileLayer(mapboxUrl, {
   id: "mapbox/satellite-streets-v11",
   tileSize: 512,
@@ -114,12 +118,37 @@ var baseMaps = {
 //Initializing map
 var map = L.map("map", {
   zoom: 10,
-  layers: [light],
-}).fitWorld();
+  layers: [streets],
+}).setView([54.5, -4], 6);
 
-L.control.layers(baseMaps).addTo(map);
+var landmarks = L.markerClusterGroup({
+  polygonOptions: {
+    fillColor: '#fff',
+    color: '#ff0000',
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.5
+  }}).addTo(map);
 
-var myCircles = new L.featureGroup().addTo(map);
+  var airports = L.markerClusterGroup({
+    polygonOptions: {
+      fillColor: '#fff',
+      color: '#000',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.5
+    }}).addTo(map);
+
+
+  var overlays = {
+    "Airports": airports,
+    "Landmarks": landmarks
+    };
+
+    var layerControl = L.control.layers(baseMaps, overlays).addTo(map);
+
+
+//var myCircles = new L.featureGroup().addTo(map);
 
 //building the countries select list
 $.ajax({
@@ -193,7 +222,7 @@ function getLocationPermission() {
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 
-//adding borders to the map
+
 
 //adding borders to the map
 
@@ -249,7 +278,7 @@ $("#selCountry").on("change", function () {
       //}
 
       border = L.geoJSON(countryOptionTextArray[0], {
-        color: "#5F97FB",
+        color: "#76b360",
         weight: 3,
         opacity: 0.75,
       }).addTo(map);
@@ -356,7 +385,7 @@ L.easyButton(
         .then((response) => response.json())
         .then((data) => {
           console.log("data", data);
-          var markers = L.markerClusterGroup();
+          //var markers = L.markerClusterGroup();
 
           data["response"].forEach((airport) => {
             const airportMarker = L.ExtraMarkers.icon({
@@ -367,12 +396,12 @@ L.easyButton(
             });
 
             const marker = L.marker([airport.lat, airport.lng], {icon:airportMarker})
-            MarkersList.push(markers)
-            markers.addLayer(marker)
+            MarkersList.push(airports)
+            airports.addLayer(marker)
             //marker.addTo(map);
             marker.bindPopup(`${airport.name} (${airport.iata_code})`);
           });
-          map.addLayer(markers);
+          map.addLayer(airports);
         })
         .catch((error) => console.error(error));
     });
@@ -406,7 +435,7 @@ L.easyButton(
         )
           .then((response) => response.json())
           .then((data) => {
-            var markers = L.markerClusterGroup();
+            //var markers = L.markerClusterGroup();
             data.forEach((place) => {
               const PlaceMarker = L.ExtraMarkers.icon({
                 icon: 'fas fa-landmark',
@@ -415,12 +444,12 @@ L.easyButton(
                 //prefix: 'fas'
               });
               const marker = L.marker([place.lat, place.lon], {icon:PlaceMarker})
-              MarkersList.push(markers)
-              markers.addLayer(marker)
+              MarkersList.push(landmarks)
+              landmarks.addLayer(marker)
               //marker.addTo(map);
               marker.bindPopup(`${place.display_name}`);
             });
-            map.addLayer(markers);
+            map.addLayer(landmarks);
           })
           .catch((error) => {
             console.error(error);
@@ -451,18 +480,24 @@ L.easyButton(
             newsCountry: iso2CountryCode,
           },
           success: function (result) {
+
+            
+
             $("#newsList").html("");
             for (var i = 0; i < result.data.length; i++) {
               $("#newsList")
                 .append(`<div class="newsList"><a href="${result.data[i].url}"> <div class="news-title"><b>${result.data[i].title}</b></div></a>
           <div class="news-description">${result.data[i].description}
           </div><div class="news-info">
+              <div class="news-image news-info-item"><b> </b> <img src=${result.data[i].image}></div>
               <div class="news-author news-info-item"><b>Author: </b>${result.data[i].author}</div>
               <div class="news-category news-info-item"><b>Category: </b>${result.data[i].category}</div>
-              <div class="news-date news-info-item"><b>Published At: </b>${result.data[i].published_at}</div>
+              <div class="news-date news-info-item"><b>Published At: </b>${Date.parse(result.data[i].published_at).toString("MMMM dS, yyyy")}</div>
               <div class="news-country news-info-item"><b>Source: </b>${result.data[i].source}</div>
           </div></div>`);
+
             }
+            
           },
           error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
@@ -491,18 +526,19 @@ L.easyButton(
       data: {},
       success: function (result) {
         console.log("deaths: ", result.deaths);
-        $("#txtCovidDeaths").html("" + result.deaths + "<br>");
+
+        $("#txtCovidDeaths").html("" + numeral(result.deaths).format('0,0') + "<br>");
         $("#txtCovidCases").html(
-          " " + result.cases + "<br>"
+          " " + numeral(result.cases).format('0,0') + "<br>"
         );
         $("#txtCovidRecovered").html(
-          " " + result.recovered + "<br>"
+          " " + numeral(result.recovered).format('0,0') + "<br>"
         );
         $("#txtCovidCritical").html(
-          " " + result.critical + "<br>"
+          " " + numeral(result.critical).format('0,0') + "<br>"
         );
         $("#txtCovidDeathRate").html(
-          "<strong>Death rate: " + result.oneDeathPerPeople + " %</strong><br>"
+          "<strong>Death rate: " + numeral(result.oneDeathPerPeople).format('0,0') + " %</strong><br>"
         );
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -535,13 +571,13 @@ L.easyButton(
             capitalCityLat = result.weatherData.coord.lat;
             capitalCityLon = result.weatherData.coord.lon;
 
-            $("#HeadlineTitle").html(result.weatherData.name + "&nbsp;" + "Weather Today" + "<br>");
+            $("#HeadlineTitle").html(result.weatherData.name + "&nbsp;" + "weather today" + "<br>");
             console.log(result.weatherData.name);
             $("#txtCapitalWeatherCurrent").html(
               "&nbsp;&nbsp;" +
               result.weatherData.weather[0].description + "<br>" +
               "&nbsp;&nbsp;" +
-              result.weatherData.main.temp +
+              Math.floor(result.weatherData.main.temp) +
               "&#8451<br>"
             );
             $("#feelsLike").html(
@@ -561,13 +597,18 @@ L.easyButton(
             );
             $("#humidity").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
-              result.weatherData.main.humidity +
-              "&#8451<br>"
+              Math.floor(result.weatherData.main.humidity) +
+              "%<br>"
+            );
+            $("#wind").html(
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
+              Math.floor(result.weatherData.wind.speed) +
+              "m/s<br>"
             );
             $("#pressure").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
-              result.weatherData.main.pressure +
-              "&#8451<br>"
+              Math.floor(result.weatherData.main.pressure) +
+              "mbar<br>"
             );
           },
           error: function (jqXHR, textStatus, errorThrown) {
@@ -600,6 +641,7 @@ L.easyButton(
       success: function (result) {
         console.log("hello");
         console.log("restCountries", result);
+
         if (result.status.name == "ok") {
           console.log("hello2");
           currencyCode = JSON.stringify(result.data[0].currencies)
@@ -613,7 +655,7 @@ L.easyButton(
           $("#txtName").html(result.data[0].name.common + "<br>");
           $("#txtCurrency").html("<strong> " + currencyCode + "</strong><br>");
           $("#txtCurrencyCode").html(
-            "Code: <strong>" + currencyCode + "</strong><br>"
+            " <strong>" + currencyCode + "</strong><br>"
           );
 
           //Home(Wikipedia info)
@@ -650,26 +692,26 @@ L.easyButton(
               console.log("Geonames Data", result);
               if (result.status.name == "ok") {
                 $("#txtCapital").html(
-                  "Capital: <strong>" + result.data[0].capital + "</strong><br>"
+                  "<strong>" + result.data[0].capital + "</strong><br>"
                 );
 
                 $("#txtAreaInSqKm").html(
-                  "Area: <strong>" +
-                  result.data[0].areaInSqKm +
+                  "<strong>" +
+                  numeral(result.data[0].areaInSqKm).format('0,0') +
                   "</strong> km²<br>"
                 );
                 $("#txtContinent").html(
-                  "Continent: <strong>" +
+                  "<strong>" +
                   result.data[0].continent +
                   "</strong><br>"
                 );
                 $("#txtPopulation").html(
-                  "Population: <strong>" +
-                  result.data[0].population +
+                  "<strong>" +
+                  numeral(result.data[0].population).format('0,0') +
                   "</strong><br>"
                 );
                 $("#txtLanguages").html(
-                  "Languages: <strong>" +
+                  "<strong>" +
                   result.data[0].languages +
                   "</strong><br>"
                 );
@@ -691,7 +733,7 @@ L.easyButton(
                 console.log("exchange: ", result.status);
                 exchangeRate = result.exchangeRate.rates[currencyCode];
                 $("#txtRate").html(
-                  "Exchange Rate: <strong>" +
+                  "<strong>" +
                   exchangeRate.toFixed(3) +
                   "</strong> " +
                   currencyCode +
