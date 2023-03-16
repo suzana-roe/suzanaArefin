@@ -24,12 +24,12 @@ body,
   pointer-events: auto;
 }
 
-.leaflet-control-container {
-  /*position: absolute;
+/*.leaflet-control-container {
+  position: absolute;
   top: 100px;
-  z-index: 0;*/
+  z-index: 0;
   
-}
+}*/
 
 /*h3 {
   padding-left: 1rem;
@@ -90,7 +90,7 @@ body,
   font-weight: bold;
 }
 
-#btnHelp {
+/*#btnHelp {
   margin-left: 0.5rem;
   background-color: #d5fecf;
   border: none;
@@ -102,7 +102,7 @@ body,
   background-color: #d5fecf;
   border: 1px solid #d5fecf;
   font-weight: bold;
-}
+}*/
 
 #btnClose img {
   height: 30px; 
@@ -110,7 +110,6 @@ body,
 }
 
 
-/* Info container section styles*/
 
 /* Header */
 
@@ -152,7 +151,7 @@ body,
   color: black !important;
 }*/
 
-/* ------------------- botones ------------------ */
+/* ------------------- buttons and navs ------------------ */
 
 button {
   padding: 0;
@@ -161,7 +160,7 @@ button {
   line-height: 0px;
 }
 
-/* fichas */
+
 #nav-covid {
   text-align: left;
   padding-left: 20px;
@@ -324,13 +323,13 @@ a{
   border: none;
 }
 
-#issInfoBanner {
+/*#issInfoBanner {
   visibility: hidden;
   font-weight: bold;
   margin-left: 50px;
   text-align: center;
   animation: blinkingText 1.2s infinite;
-}
+}*/
 @keyframes blinkingText {
   0% {
     color: #000;
@@ -374,7 +373,7 @@ a{
   padding-left: 30px;
 }
 
-.custom-popup .leaflet-popup-content-wrapper {
+/*.custom-popup .leaflet-popup-content-wrapper {
   background: #d6fed0;
   color: #000000;
   font-size: 14px;
@@ -391,7 +390,7 @@ a{
 
 .custom-popup .leaflet-popup-tip {
   background: #d6fed0;
-}
+}*/
 
 #exampleModal2 {
   height: 400px;
@@ -402,9 +401,10 @@ a{
   z-index: 35;
 }*/
 
-/*.leaflet-control-zoom {
-  position: absolute;
-  z-index: 10000;
+/*.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  position: relative;
+
 }*/
 
 /*.leaflet-control-zoom {
@@ -527,3 +527,4 @@ body{
 .modal-body p{
   color: #0f0f0f;
 }
+
