@@ -19,21 +19,36 @@ body,
   position: absolute;
   float: top;
   z-index: 2;
-  /* background-color: #d5fecf; */
+  /* background-color: #d5fecf;*/
 
   pointer-events: auto;
 }
 
 .leaflet-control-container {
-  position: relative;
+  /*position: absolute;
   top: 100px;
+  z-index: 0;*/
+  
 }
 
-h3 {
+/*h3 {
   padding-left: 1rem;
+}*/
+
+#selectContainer {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 10px 0;
 }
 
-.form-select {
+#selCountry {
+  width: 200px;
+  margin: 0 auto;
+}
+
+/*.form-select {
   margin-right: 0.5rem;
   max-width: 15%;
   padding: 9px;
@@ -47,10 +62,10 @@ h3 {
     from(black),
     color-stop(4%, #125fb2),
     to(black)
-  );*/
+  );
   color: white; 
   background-color: black;
-}
+}*/
 
 
 
@@ -108,6 +123,8 @@ h3 {
 .modal-body {
   height: 70vh;
   overflow-y: auto;
+  
+
 
   /*background-color: #d5fecf;*/
 }
@@ -271,7 +288,7 @@ a{
 
 /*weather section styles*/
 
-#txtCapitalWeatherCurrent,
+/*#txtCapitalWeatherCurrent,
 #txtCapitalWeatherForcast {
   font-weight: bold;
   color: black;
@@ -285,7 +302,7 @@ a{
 #txtCapitalWeatherLo,
 #txtCapitalWeatherFLo {
   color: blue;
-}
+}*/
 
 /* Footer */
 
@@ -380,23 +397,24 @@ a{
   height: 400px;
 }
 
-.leaflet-control-scale-line {
+/*.leaflet-control-scale-line {
   position: relative;
   z-index: 35;
-}
+}*/
 
-.leaflet-control-zoom {
+/*.leaflet-control-zoom {
+  position: absolute;
+  z-index: 10000;
+}*/
+
+/*.leaflet-control-zoom {
   position: relative;
-}
+}*/
 
-.leaflet-control-zoom {
-  position: relative;
-}
-
-.leaflet-control-attribution, .leaflet-control-scale-line {
+/*.leaflet-control-attribution, .leaflet-control-scale-line {
   background-color: red;
   position: absolute;
-}
+}*/
 
 
 .newsList {
@@ -458,9 +476,9 @@ body{
   color: white;  
 }
 
-#current-weather{
+/*#current-weather{
   padding: 15px;
-}
+}*/
 
 #mainTemperature{
   font-size: 5.5em; 
@@ -473,8 +491,8 @@ body{
 }
 
 .day-weather-box {
-  border: 1px solid #28688C;
-  background-color: #2E7FA1;
+  border: 1px solid #2e5122;
+  background-color: #579640;
   border-radius: 5px;
   height: 5em;
 }
@@ -493,8 +511,12 @@ body{
   padding: 0px 5px;
 }
 
-.forecast-main {
+/*.forecast-main {
   padding: 0px 0px 0px 30px;
+}*/
+
+#forecast-day-1, #forecast-day-2-main, #forecast-day-3-main, #forecast-day-4-main {
+  font-size: 15px;
 }
 
 .forecast-icon {
@@ -503,5 +525,5 @@ body{
 }
 
 .modal-body p{
-  color: #333;
+  color: #0f0f0f;
 }

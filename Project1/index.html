@@ -29,13 +29,13 @@
   <div class="overlay2">
     <nav class="navbar navbar-light d-flex justify-content-end">
 
-      <select class="form-select" name="sel-country" id="selCountry"></select>
-
+      <!--<select class="form-select" name="sel-country" id="selCountry"></select>-->
+      <span id="selContainer"><select id="selCountry" class="form-select shadow-sm"></select></span>
 
 
     </nav>
   </div>
-
+  
   <div class='custom-popup' id="map"></div>
 
   <!-- Modal -->
@@ -156,16 +156,16 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><span id="txtName">Covid Information</span></h5>
+          <h5 class="modal-title" id="covidCountry"></h5>
+          
           <button type="button" id="btnClose" class="btn btn-secondary" data-bs-dismiss="modal"><img src="./img/off.png" /></button>
         </div>
 
-        <div class="modal-body modal-body-table">
 
           <table class="table table-striped table-fixed">
             <tbody>
               <tr>
-                <td><i class="fas fa-clipboard-list fa-lg covid-icon-color"></i></td>
+                <td ><i class="fas fa-clipboard-list fa-lg covid-icon-color"></i></td>
                 <td>Total cases</td>
                 <td id="txtCovidCases"></td>
               </tr>
@@ -187,7 +187,7 @@
             </tbody>
           </table>
 
-        </div>
+
 
       </div>
     </div>
@@ -222,15 +222,15 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><span id="txtName">Capital Weather Information</span></h5>
+          <h5 class="modal-title" id="weatherCapital"></h5>
           <button type="button" id="btnClose" class="btn btn-secondary" data-bs-dismiss="modal"><img src="./img/off.png" /></button>
         </div>
 
-        <div class="modal-body">
+        
 
-          <div class="container" id="wrapper">
-            <div class="container-fluid" id="current-weather">
-              <div class="row">
+    <div class="container" id="wrapper">
+        <div class="container-fluid" id="current-weather">
+            <div class="row">
                 
        <!-- Right panel -->
        <div class="col-md-4 col-sm-5">
@@ -243,7 +243,9 @@
         <div class="row">
           <div>
             <i class="fas fa-cloud-sun-rain fa-2x"></i>
-            <span style="font-size: 1.5rem; color: white;" id="txtCapitalWeatherCurrent"></span>
+            <span style="font-size: 1.5rem; color: white;" id="txtCapitalWeatherCurrent"></span><br>
+
+            
             
         </div>
           
@@ -253,16 +255,97 @@
            <!-- Left panel -->
       <div class="col-xs-12 col-sm-12 col-md-3 row" style="text-align: right;">
         <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-          <h6>Humidity:<spam id="humidity"></spam></h6>
+          <span style="font-size: 1.5rem; color: white;" id="txtCapitalWeatherHi"></span>
+          <span style="font-size: 1.5rem; color: white;" id="txtCapitalWeatherLo"></span>
         </div>
-        <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-          <h6>Pressure:<spam id="pressure"></spam></h6>
-        </div>
-        <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+        
+        <!--<div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
           <h6>Wind:<spam id="wind"></spam></h6>
-        </div>
+        </div>-->
        
       </div>
+
+      <!-- 4 days forecast -->
+  <div class="container-fluid">
+    <div class="row" style="padding: 2px;">
+      
+      <!-- Day 1 -->
+      <div class="col-md-3 col-sm-6 day-weather-box">
+        <div class="col-sm-12 day-weather-inner-box">
+          <div class="col-sm-8 forecast-main">
+            <p id="forecast-day-1-name"></p>
+            <div class="row">
+              <h5 id="forecast-day-1"></h5>
+              <i class="wi forecast-icon" id="forecast-day-1-icon"></i>
+            </div>
+          </div>
+          <div class="col-sm-4 forecast-min-low">
+            <p><spam class="high-temperature" id="forecast-day-1-ht"></spam></p>
+            <p><spam class="low-temperature" id="forecast-day-1-lt"></spam></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="col-md-3 col-sm-6 day-weather-box">
+        <div class="col-sm-12 day-weather-inner-box">
+          <div class="col-sm-8 forecast-main">
+            <p id="forecast-day-2-name"></p>
+            <div class="row">
+              <h5 id="forecast-day-2-main">°</h5>
+              <i class="wi forecast-icon" id="forecast-day-2-icon"></i>
+            </div>
+          </div>
+          <div class="col-sm-4 forecast-min-low">
+            <p><spam class="high-temperature" id="forecast-day-2-ht"></spam></p>
+            <p><spam class="low-temperature" id="forecast-day-2-lt"></spam></p>
+          </div>
+        </div>
+      </div>
+
+       
+      <!-- Day 3 -->
+      <div class="col-md-3 col-sm-6 day-weather-box">
+        <div class="col-sm-12 day-weather-inner-box">
+          <div class="col-sm-8 forecast-main">
+            <p id="forecast-day-3-name"></p>
+            <div class="row">
+              <h5 id="forecast-day-3-main"></h5>
+              <i class="wi forecast-icon" id="forecast-day-3-icon"></i>
+            </div>
+          </div>
+          <div class="col-sm-4 forecast-min-low">
+            <p><spam class="high-temperature" id="forecast-day-3-ht"></spam></p>
+            <p><spam class="low-temperature" id="forecast-day-3-lt"></spam></p>
+          </div>
+        </div>
+      </div>
+
+            <!-- Day 4 -->
+            <div class="col-md-3 col-sm-6 day-weather-box">
+              <div class="col-sm-12 day-weather-inner-box">
+                <div class="col-sm-8 forecast-main">
+                  <p id="forecast-day-4-name"></p>
+                  <div class="row">
+                    <h5 id="forecast-day-4-main">°</h5>
+                    <i class="wi forecast-icon" id="forecast-day-4-icon"></i>
+                  </div>
+                </div>
+                <div class="col-sm-4 forecast-min-low">
+                  <p><spam class="high-temperature" id="forecast-day-4-ht"></spam></p>
+                  <p><spam class="low-temperature" id="forecast-day-4-lt"></spam></p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+      
+    </div>
+  </div>
+
+  
+
+  
       
     </div>
   </div>

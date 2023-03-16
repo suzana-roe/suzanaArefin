@@ -292,7 +292,73 @@ $("#selCountry").on("change", function () {
       console.log(textStatus, errorThrown);
     },
   });
+
+  //loading airport layer
+
+  const api_key = "58368c73-fec1-4214-a5c7-ca85169e04e6";
+
+  fetch(
+    `https://airlabs.co/api/v9/airports?country_code=${countryCode}&api_key=${api_key}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data", data);
+      //var markers = L.markerClusterGroup();
+
+      data["response"].forEach((airport) => {
+        const airportMarker = L.ExtraMarkers.icon({
+          icon: 'fas fa-plane',
+          markerColor: 'red',
+          shape: 'circle',
+          //prefix: 'fas'
+        });
+
+        const marker = L.marker([airport.lat, airport.lng], {icon:airportMarker})
+        MarkersList.push(airports)
+        airports.addLayer(marker)
+        //marker.addTo(map);
+        marker.bindPopup(`${airport.name} (${airport.iata_code})`);
+      });
+      map.addLayer(airports);
+    })
+    .catch((error) => console.error(error));
+
+    //loading landmark layer
+    resetCountryData(countryCode).then(
+      (resolved) => {
+        console.log("capitalCityWeather2: ", capitalCityWeather);
+        console.log("countryName2: ", countryName);
+
+        fetch(
+          `https://nominatim.openstreetmap.org/search.php?q=${capitalCityWeather}%20${countryName}&format=json`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            //var markers = L.markerClusterGroup();
+            data.forEach((place) => {
+              const PlaceMarker = L.ExtraMarkers.icon({
+                icon: 'fas fa-landmark',
+                markerColor: 'green',
+                shape: 'square',
+                //prefix: 'fas'
+              });
+              const marker = L.marker([place.lat, place.lon], {icon:PlaceMarker})
+              MarkersList.push(landmarks)
+              landmarks.addLayer(marker)
+              //marker.addTo(map);
+              marker.bindPopup(`${place.display_name}`);
+            });
+            map.addLayer(landmarks);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      },
+      (rejetced) => {}
+    );
 });
+
+
 
 //new event for map click
 
@@ -355,7 +421,7 @@ $(window).keypress(function (e) {
 //EASY BUTTONS AND MODALS
 
 //airport
-L.easyButton(
+/*L.easyButton(
   //'<img src="./img/plane.png" style="height:30px; width:30px;" title="Airports Markers">',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"/></svg>',
 
@@ -458,7 +524,7 @@ L.easyButton(
       (rejetced) => {}
     );
   }
-).addTo(map);
+).addTo(map);*/
 
 //news
 
@@ -484,7 +550,9 @@ L.easyButton(
             
 
             $("#newsList").html("");
-            for (var i = 0; i < result.data.length; i++) {
+            for (var i = 0; i < result.data.length; i++) 
+            if (result.data[i].author !== null) {
+              
               $("#newsList")
                 .append(`<div class="newsList"><a href="${result.data[i].url}"> <div class="news-title"><b>${result.data[i].title}</b></div></a>
           <div class="news-description">${result.data[i].description}
@@ -496,6 +564,20 @@ L.easyButton(
               <div class="news-country news-info-item"><b>Source: </b>${result.data[i].source}</div>
           </div></div>`);
 
+         
+            }
+            
+            else {
+              $("#newsList")
+                .append(`<div class="newsList"><a href="${result.data[i].url}"> <div class="news-title"><b>${result.data[i].title}</b></div></a>
+          <div class="news-description">${result.data[i].description}
+          </div><div class="news-info">
+              <div class="news-image news-info-item"><b> </b> <img src=${result.data[i].image}></div>
+              <div class="news-author news-info-item"><b>Author: </b>${result.data[i].author = "Not Available"}</div>
+              <div class="news-category news-info-item"><b>Category: </b>${result.data[i].category}</div>
+              <div class="news-date news-info-item"><b>Published At: </b>${Date.parse(result.data[i].published_at).toString("MMMM dS, yyyy")}</div>
+              <div class="news-country news-info-item"><b>Source: </b>${result.data[i].source}</div>
+          </div></div>`);
             }
             
           },
@@ -526,7 +608,8 @@ L.easyButton(
       data: {},
       success: function (result) {
         console.log("deaths: ", result.deaths);
-
+        
+        $('#covidCountry').html(result.country + "'s" + " " + "Covid Statistics");
         $("#txtCovidDeaths").html("" + numeral(result.deaths).format('0,0') + "<br>");
         $("#txtCovidCases").html(
           " " + numeral(result.cases).format('0,0') + "<br>"
@@ -571,15 +654,15 @@ L.easyButton(
             capitalCityLat = result.weatherData.coord.lat;
             capitalCityLon = result.weatherData.coord.lon;
 
-            $("#HeadlineTitle").html(result.weatherData.name + "&nbsp;" + "weather today" + "<br>");
+            $('#weatherCapital').html(result.weatherData.name + "'s" + " " + "Weather Information");
+            $("#HeadlineTitle").html("Today");
+
             console.log(result.weatherData.name);
             $("#txtCapitalWeatherCurrent").html(
               "&nbsp;&nbsp;" +
               result.weatherData.weather[0].description + "<br>" +
-              "&nbsp;&nbsp;" +
-              Math.floor(result.weatherData.main.temp) +
-              "&#8451<br>"
-            );
+              "&nbsp;&nbsp;");
+              
             $("#feelsLike").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
               result.weatherData.main.feels_like +
@@ -587,13 +670,13 @@ L.easyButton(
             );
             $("#txtCapitalWeatherLo").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
-              result.weatherData.main.temp_min +
-              "&#8451<br>"
+              Math.floor(result.weatherData.main.temp_min) +
+              "°<br>"
             );
             $("#txtCapitalWeatherHi").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
-              result.weatherData.main.temp_max +
-              "&#8451<br>"
+              Math.floor(result.weatherData.main.temp_max) +
+              "°<br>"
             );
             $("#humidity").html(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
@@ -605,16 +688,53 @@ L.easyButton(
               Math.floor(result.weatherData.wind.speed) +
               "m/s<br>"
             );
-            $("#pressure").html(
-              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
-              Math.floor(result.weatherData.main.pressure) +
-              "mbar<br>"
-            );
+
+            
+         
+
+        //forcast API
+        $.ajax({
+          url: "./php/openWeatherForcast.php",
+          type: 'GET',
+          dataType: 'json',
+          data: {
+              lat: capitalCityLat,
+              lng: capitalCityLon
           },
+          success: function(result) {
+              
+              console.log('Weather Forecast',result);
+              
+              if (result.status.name == "ok") {
+                    
+                    $('#forecast-day-1').html(Date.parse(result.weatherForcast.list[8].dt_txt).toString("MMMM dS"));
+                    $('#forecast-day-1-ht').html(Math.floor(result.weatherForcast.list[8].main.temp_max) + '°<br>')
+                    $('#forecast-day-1-lt').html(Math.floor(result.weatherForcast.list[8].main.temp_min) + '°<br>')
+
+                    $('#forecast-day-2-main').html(Date.parse(result.weatherForcast.list[16].dt_txt).toString("MMMM dS"));
+                    $('#forecast-day-2-ht').html(Math.floor(result.weatherForcast.list[16].main.temp_max) + '°<br>')
+                    $('#forecast-day-2-lt').html(Math.floor(result.weatherForcast.list[16].main.temp_min) + '°<br>')
+
+                    $('#forecast-day-3-main').html(Date.parse(result.weatherForcast.list[23].dt_txt).toString("MMMM dS"));
+                    $('#forecast-day-3-ht').html(Math.floor(result.weatherForcast.list[23].main.temp_max) + '°<br>')
+                    $('#forecast-day-3-lt').html(Math.floor(result.weatherForcast.list[23].main.temp_min) + '°<br>')
+
+                    $('#forecast-day-4-main').html(Date.parse(result.weatherForcast.list[33].dt_txt).toString("MMMM dS"));
+                    $('#forecast-day-4-ht').html(Math.floor(result.weatherForcast.list[33].main.temp_max) + '°<br>')
+                    $('#forecast-day-4-lt').html(Math.floor(result.weatherForcast.list[33].main.temp_min) + '°<br>')
+              }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus, errorThrown);
+          }
+      });
+
+       },
           error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
           },
         });
+
       },
       (error) => {
         alert("Error reseting country data !!");
@@ -622,6 +742,8 @@ L.easyButton(
     );
   }
 ).addTo(map);
+
+//weather forecast
 
 //country information modal
 console.log("out");
