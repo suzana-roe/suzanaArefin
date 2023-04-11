@@ -28,7 +28,7 @@ function resetCountryData(country_code) {
         code: country_code,
       },
       success: function (result) {
-        console.log("restCountries", result);
+        //console.log("restCountries", result);
         if (result.status.name == "ok") {
           currencyCode = JSON.stringify(result.data[0].currencies)
             .split('":{')[0]
@@ -157,7 +157,7 @@ $.ajax({
   dataType: "json",
 
   success: function (result) {
-    console.log("populate options", result);
+    //console.log("populate options", result);
 
     if (result.status.name == "ok") {
       for (var i = 0; i < result.data.length; i++) {
@@ -197,14 +197,14 @@ const successCallback = (position) => {
     },
 
     success: function (result) {
-      console.log("openCage PHP", result);
+      //console.log("openCage PHP", result);
       currentLat = result.data[0].geometry.lat;
       currentLng = result.data[0].geometry.lng;
 
 
       let currentCountry = result.data[0].components.country_code;
       selectedCountry = result.data[0].components.country_code;
-      console.log($("#selCountry")[0]);
+      //console.log($("#selCountry")[0]);
       $("#selCountry").val(currentCountry.toUpperCase()).change();
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -237,13 +237,13 @@ $("#selCountry").on("change", function () {
   MarkersList= []
 
   let countryCode = $("#selCountry").val() || selectedCountry;
-  console.log(countryCode, "@country");
+  //console.log(countryCode, "@country");
 
   let countryOptionText = $("#selCountry").find("option:selected").text();
 
   if (!visitedCountries.includes(countryOptionText)) {
     visitedCountries.push(countryOptionText);
-    console.log("Array visited countries", visitedCountries);
+    //console.log("Array visited countries", visitedCountries);
   }
 
   const showFirstTab = function () {
@@ -251,7 +251,7 @@ $("#selCountry").on("change", function () {
   };
   showFirstTab();
 
-  console.log(countryCode, "@countrycode");
+  //console.log(countryCode, "@countrycode");
 
   $.ajax({
     url: `./php/getCountryData.php?countryCode=${countryCode}`,
@@ -259,7 +259,7 @@ $("#selCountry").on("change", function () {
     dataType: "json",
 
     success: function (result) {
-      console.log("all borders result", result);
+      //console.log("all borders result", result);
 
       if (map.hasLayer(border)) {
         map.removeLayer(border);
@@ -267,7 +267,7 @@ $("#selCountry").on("change", function () {
 
       let countryArray = [];
       let countryOptionTextArray = [];
-      console.log(typeof result);
+      //console.log(typeof result);
       //for (let i = 0; i < result.data.border.features.length; i++) {
       //if (result.data.border.features[i].properties.iso_a3 === countryCode) {
       countryArray.push(result);
@@ -306,7 +306,7 @@ $("#selCountry").on("change", function () {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log("data", data);
+      //console.log("data", data);
       //var markers = L.markerClusterGroup();
 
       data["response"].forEach((airport) => {
@@ -330,8 +330,8 @@ $("#selCountry").on("change", function () {
     //loading landmark layer
     resetCountryData(countryCode).then(
       (resolved) => {
-        console.log("capitalCityWeather2: ", capitalCityWeather);
-        console.log("countryName2: ", countryName);
+        //console.log("capitalCityWeather2: ", capitalCityWeather);
+        //console.log("countryName2: ", countryName);
 
         fetch(
           `https://nominatim.openstreetmap.org/search.php?q=${capitalCityWeather}%20${countryName}&format=json`
@@ -358,7 +358,7 @@ $("#selCountry").on("change", function () {
             console.error(error);
           });
       },
-      (rejetced) => {}
+      (rejected) => {}
     );
 });
 
@@ -380,7 +380,7 @@ map.on("click", function (e) {
 
     success: function (result) {
       if (result.data[0].components.country_code) {
-        console.log("openCage PHP", result);
+        //console.log("openCage PHP", result);
 
         currentLat = result.data[0].geometry.lat;
         currentLng = result.data[0].geometry.lng;
@@ -389,8 +389,8 @@ map.on("click", function (e) {
         let currentCountry = result.data[0].components.country_code;
         $("#selCountry").val(currentCountry.toUpperCase()).change();
       } else {
-        console.log("clicked on water");
-        console.log("openCage PHP", result);
+        //console.log("clicked on water");
+        //console.log("openCage PHP", result);
 
         currentLat = result.data[0].geometry.lat;
         currentLng = result.data[0].geometry.lng;
@@ -533,7 +533,7 @@ L.easyButton(
 //news
 
 L.easyButton(
-  '<i class="fas fa-newspaper fa-2x center-align" type="button" id="newsInfo" data-bs-toggle="modal" data-bs-target="#newsModal"></i>',
+  '<i class="fas fa-newspaper fa-1x" id="newsInfo" data-bs-toggle="modal" data-bs-target="#newsModal"></i>',
   //'<img src="./img/newspaper.png" style="height:30px; width:30px;" type="button" id="newsInfo" data-bs-toggle="modal" data-bs-target="#newsModal">',
   //'<svg id="newsInfo" data-bs-toggle="modal" data-bs-target="#newsModal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H424c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm0 184c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16zM160 400c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>',
 
@@ -599,7 +599,7 @@ L.easyButton(
 //covid
 
 L.easyButton(
-  '<i class="fas fa-virus fa-2x center-align" type="button" id="coronaInfo" data-bs-toggle="modal" data-bs-target="#coronaModal"></i>',
+  '<i class="fas fa-virus fa-1x" id="coronaInfo" data-bs-toggle="modal" data-bs-target="#coronaModal"></i>',
   //'<img src="./img/coronavirus.png" style="height:30px; width:30px;" type="button" id="coronaInfo" data-bs-toggle="modal" data-bs-target="#coronaModal">',
   //'<svg id="coronaInfo" data-bs-toggle="modal" data-bs-target="#coronaModal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M192 24c0-13.3 10.7-24 24-24h80c13.3 0 24 10.7 24 24s-10.7 24-24 24H280V81.6c30.7 4.2 58.8 16.3 82.3 34.1L386.1 92 374.8 80.6c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l56.6 56.6c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L420 125.9l-23.8 23.8c17.9 23.5 29.9 51.7 34.1 82.3H464V216c0-13.3 10.7-24 24-24s24 10.7 24 24v80c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H430.4c-4.2 30.7-16.3 58.8-34.1 82.3L420 386.1l11.3-11.3c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-56.6 56.6c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L386.1 420l-23.8-23.8c-23.5 17.9-51.7 29.9-82.3 34.1V464h16c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h16V430.4c-30.7-4.2-58.8-16.3-82.3-34.1L125.9 420l11.3 11.3c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L46.7 408.7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L92 386.1l23.8-23.8C97.9 338.8 85.8 310.7 81.6 280H48v16c0 13.3-10.7 24-24 24s-24-10.7-24-24V216c0-13.3 10.7-24 24-24s24 10.7 24 24v16H81.6c4.2-30.7 16.3-58.8 34.1-82.3L92 125.9 80.6 137.2c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l56.6-56.6c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L125.9 92l23.8 23.8c23.5-17.9 51.7-29.9 82.3-34.1V48H216c-13.3 0-24-10.7-24-24zm48 200a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm64 104a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>',
 
@@ -613,7 +613,7 @@ L.easyButton(
       dataType: "json",
       data: {},
       success: function (result) {
-        console.log("deaths: ", result.deaths);
+        //console.log("deaths: ", result.deaths);
         
         $('#covidCountry').html(result.country + "'s" + " " + "Covid Statistics");
         $("#txtCovidDeaths").html("" + numeral(result.deaths).format('0,0') + "<br>");
@@ -640,7 +640,7 @@ L.easyButton(
 //current weather
 
 L.easyButton(
-  '<i class="fas fa-temperature-low fa-2x" type="button" id="weatherInfo" data-bs-toggle="modal" data-bs-target="#weatherModal"></i>',
+  '<i class="fas fa-temperature-low fa-1x" id="weatherInfo" data-bs-toggle="modal" data-bs-target="#weatherModal"></i>',
   //'<img src="./img/hot.png" style="height:30px; width:30px;" type="button" id="weatherInfo" data-bs-toggle="modal" data-bs-target="#weatherModal">',
   //'<svg id="weatherInfo" data-bs-toggle="modal" data-bs-target="#weatherModal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M294.2 1.2c5.1 2.1 8.7 6.7 9.6 12.1l14.1 84.7 84.7 14.1c5.4 .9 10 4.5 12.1 9.6s1.5 10.9-1.6 15.4l-38.5 55c-2.2-.1-4.4-.2-6.7-.2c-23.3 0-45.1 6.2-64 17.1l0-1.1c0-53-43-96-96-96s-96 43-96 96s43 96 96 96c8.1 0 15.9-1 23.4-2.9c-36.6 18.1-63.3 53.1-69.8 94.9l-24.4 17c-4.5 3.2-10.3 3.8-15.4 1.6s-8.7-6.7-9.6-12.1L98.1 317.9 13.4 303.8c-5.4-.9-10-4.5-12.1-9.6s-1.5-10.9 1.6-15.4L52.5 208 2.9 137.2c-3.2-4.5-3.8-10.3-1.6-15.4s6.7-8.7 12.1-9.6L98.1 98.1l14.1-84.7c.9-5.4 4.5-10 9.6-12.1s10.9-1.5 15.4 1.6L208 52.5 278.8 2.9c4.5-3.2 10.3-3.8 15.4-1.6zM144 208a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM639.9 431.9c0 44.2-35.8 80-80 80H288c-53 0-96-43-96-96c0-47.6 34.6-87 80-94.6l0-1.3c0-53 43-96 96-96c34.9 0 65.4 18.6 82.2 46.4c13-9.1 28.8-14.4 45.8-14.4c44.2 0 80 35.8 80 80c0 5.9-.6 11.7-1.9 17.2c37.4 6.7 65.8 39.4 65.8 78.7z"/></svg>',
   
@@ -658,14 +658,14 @@ L.easyButton(
             capital: capitalCityWeather,
           },
           success: function (result) {
-            console.log("CurrentCapitalWeather", result);
+            //console.log("CurrentCapitalWeather", result);
             capitalCityLat = result.weatherData.coord.lat;
             capitalCityLon = result.weatherData.coord.lon;
 
             $('#weatherCapital').html(result.weatherData.name + "'s" + " " + "Weather Information");
             $("#HeadlineTitle").html("Today");
 
-            console.log(result.weatherData.name);
+            //console.log(result.weatherData.name);
             $("#txtCapitalWeatherCurrent").html(
               "&nbsp;&nbsp;" +
               result.weatherData.weather[0].description + "<br>" +
@@ -711,7 +711,7 @@ L.easyButton(
           },
           success: function(result) {
               
-              console.log('Weather Forecast',result);
+              //console.log('Weather Forecast',result);
               
               if (result.status.name == "ok") {
                     
@@ -751,17 +751,17 @@ L.easyButton(
   }
 ).addTo(map);
 
-//weather forecast
+
 
 //country information modal
-console.log("out");
+//console.log("out");
 L.easyButton(
-  '<i class="fas fa-globe fa-2x" type="button" id="runBtn" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>',
+  '<i class="fas fa-globe fa-1x" id="runBtn" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>',
   //'<img src="./img/planet-earth.png" style="height:30px; width:30px;" type="button" id="runBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">',
   //'<svg id="runBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M57.7 193l9.4 16.4c8.3 14.5 21.9 25.2 38 29.8L163 255.7c17.2 4.9 29 20.6 29 38.5v39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9v39c0 15.6 14.9 26.9 29.9 22.6c16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7v-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1H257c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2c-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5c4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5 .3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3C163.1 48 84.4 108.9 57.7 193zM464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>',
 
   function (btn, map) {
-    console.log("inside");
+    //console.log("inside");
 
     $.ajax({
       url: "./php/restCountries.php?code=" + $('#selCountry').val().toLowerCase(),
@@ -770,11 +770,11 @@ L.easyButton(
 
 
       success: function (result) {
-        console.log("hello");
-        console.log("restCountries", result);
+        //console.log("hello");
+        //console.log("restCountries", result);
 
         if (result.status.name == "ok") {
-          console.log("hello2");
+          //console.log("hello2");
           currencyCode = JSON.stringify(result.data[0].currencies)
             .split('":{')[0]
             .split('{"')[1];
@@ -797,7 +797,7 @@ L.easyButton(
             dataType: "json",
             data: { country_name: countryName },
             success: function (result) {
-              console.log("wiki info: ", result);
+              //console.log("wiki info: ", result);
               result = result.wikiPlaces;
               $("#txtWikiImg").html(
                 "<img src=" + result.thumbnail.source + "><br>"
@@ -820,7 +820,7 @@ L.easyButton(
               geonamesInfo: iso2CountryCode,
             },
             success: function (result) {
-              console.log("Geonames Data", result);
+              //console.log("Geonames Data", result);
               if (result.status.name == "ok") {
                 $("#txtCapital").html(
                   "<strong>" + result.data[0].capital + "</strong><br>"
@@ -859,9 +859,9 @@ L.easyButton(
             type: "GET",
             dataType: "json",
             success: function (result) {
-              console.log("exchange rates", result);
+              //console.log("exchange rates", result);
               if (result.status.name == "ok") {
-                console.log("exchange: ", result.status);
+                //console.log("exchange: ", result.status);
                 exchangeRate = result.exchangeRate.rates[currencyCode];
                 $("#txtRate").html(
                   "<strong>" +
