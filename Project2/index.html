@@ -34,7 +34,7 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="#">Home</a>
 					</li>
-					
+
 				</ul>
 				<form class="d-flex">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -59,13 +59,12 @@
 		End of Buttons-->
 
 		<!-- Buttons -->
-		<div class="d-flex justify-content-end mb-4">
+		<!--<div class="d-flex justify-content-end mb-4">
 			<div class="btn-group ml-3" role="group">
 				<button type="button" id="add-btn" class="btn btn-primary" data-bs-toggle="modal"
 					data-bs-target="#add-modal" title="add">Add Personnel</button>
 			</div>
-		</div>
-
+		</div>-->
 		<!-- End of Buttons -->
 
 		<!-- Add Personnel Modal -->
@@ -101,8 +100,7 @@
 										<label for="addEmployeeDepartment">Departments</label>
 									</div>
 									<div class="form-floating mb-3">
-										<select class="form-select locationSelect" id="addEmployeeLocation" 
-											disabled>
+										<select class="form-select locationSelect" id="addEmployeeLocation">
 											<!--Dynamically Populated-->
 										</select>
 										<label for="addEmployeeLocation">Location</label>
@@ -132,37 +130,121 @@
 
 		<!-- End of Add Personnel Modal -->
 
+		<!-- Add Department Modal-->
+		<div id="add-depmodal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header bg-primary text-light">
+						<h4 class="fs-4 text-center modal-title w-100">New Department</h4>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<form id="addDepartmentForm">
+						<div class="modal-body">
+							<div class="container">
+								<div id="addDepartmentFeedback" class="feedbackMessage"></div>
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="departmentName" name="departmentName"
+										placeholder="Enter Name" required>
+									<label for="departmentName">Name</label>
+								</div>
+								<div class="form-floating mb-3">
+									<select class="form-select locationSelect" id="locationSelectForAddDept"
+										required></select>
+									<!-- Dynamically Populated -->
+									<label for="locationSelectForAddDept">Location</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button type="submit" class="btn btn-primary" id="dep-submit-btn">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- End of Add Department Modal-->
+
+		<!-- Add Location Modal -->
+		<div id="add-locmodal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header bg-primary text-light">
+						<h4 class="fs-4 text-center modal-title w-100">New Location</h4>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<form id="addLocationForm">
+						<div class="modal-body">
+							<div class="container">
+								<div id="addLocationFeedback" class="feedbackMessage"></div>
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="addLocationName" name="locationName"
+										placeholder="Enter Name" required>
+									<label for="addLocationName">Name</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button type="submit" class="btn btn-primary" id="loc-submit-btn">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- End of Add Location Modal -->
+
 		<!-- Table Nav Tabs -->
 		<ul id="NavTab" class="nav nav-tabs nav-pills nav-fill" role="tablist">
 			<li class="nav-item flex-fill">
-				<button class="nav-link active" id="navPersonnel" data-bs-toggle="pill" data-bs-target="#personnel-card" type="button" role="tab"
-					aria-controls="personnelcard" aria-selected="true" title="personnel">Personnel</button>
+				<button class="nav-link active" id="navPersonnel" data-bs-toggle="pill" data-bs-target="#personnel-card"
+					type="button" role="tab" aria-controls="personnelcard" aria-selected="true"
+					title="personnel">Personnel</button>
 			</li>
 			<li class="nav-item flex-fill">
-				<button class="nav-link" id="navDepartments" data-bs-toggle="pill" data-bs-target="#department-card" role="tab"
-					aria-controls="department" aria-selected="false" title="department">Departments</button>
+				<button class="nav-link" id="navDepartments" data-bs-toggle="pill" data-bs-target="#department-card"
+					role="tab" aria-controls="department" aria-selected="false" title="department">Departments</button>
 			</li>
 			<li class="nav-item flex-fill">
-				<button class="nav-link" id="navLocations" data-bs-toggle="pill" data-bs-target="#location-card" type="button" role="tab"
-					aria-controls="location" aria-selected="false" title="location">Locations</button>
+				<button class="nav-link" id="navLocations" data-bs-toggle="pill" data-bs-target="#location-card"
+					type="button" role="tab" aria-controls="location" aria-selected="false"
+					title="location">Locations</button>
+			</li>
+			<li class="nav-item dropdown">
+				<button class="btn btn-primary dropdown-toggle float-end" type="button" id="dropdownMenuButton1"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					Add New
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<button type="button" id="add-btn" class="btn" data-bs-toggle="modal" data-bs-target="#add-modal"
+						title="add">Personnel</button>
+					<button type="button" id="add-department" class="btn" data-bs-toggle="modal"
+						data-bs-target="#add-depmodal" title="add">Department</button>
+					<button type="button" id="add-location" class="btn" data-bs-toggle="modal"
+						data-bs-target="#add-locmodal" title="add">Location</button>
+				</ul>
 			</li>
 		</ul>
 
-		
+
 		<!-- End of Table Nav Tab -->
 
 		<!-- Table Content -->
 		<div id="tabContent" class="tab-content py-3">
 
 			<!-- Personnel Table Card -->
-			<div id="personnel-card" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="personnel-tab">
+			<div id="personnel-card" class="card tab-pane fade show active" role="tabpanel"
+				aria-labelledby="personnel-tab">
 				<h5 class="card-header text-white bg-primary">Personnel</h5>
 				<div class="card-body">
 					<table id="personnel-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-							
-								<th scope="col" >First Name</th>
+
+								<th scope="col">First Name</th>
 								<th scope="col">Last Name</th>
 								<!--<th scope="col" class="d-none d-md-table-cell">Email</th>-->
 								<th scope="col" class="d-none d-md-table-cell">Department</th>
@@ -177,11 +259,11 @@
 						</tbody>
 					</table>
 				</div>
-				</div>
-				<!--<div class="card-footer">
+			</div>
+			<!--<div class="card-footer">
 					<small class="text-muted updated"></small>
 				</div>-->
-			
+
 			<!-- End of Personnel Table Card-->
 
 			<!-- Department Table Card-->
@@ -206,9 +288,9 @@
 						</tbody>
 					</table>
 				</div>
-				
+
 			</div>
-			
+
 			<!-- End of Department Table Card-->
 
 			<!-- Location Table Card-->
@@ -230,7 +312,7 @@
 						</tbody>
 					</table>
 				</div>
-				
+
 			</div>
 			<!-- End of Location Table Card-->
 

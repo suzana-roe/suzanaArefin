@@ -126,7 +126,7 @@ $("#add-btn").click(function () {
 
 });
 
-//Generating Location list for ddd personnel modal
+//Generating Location list for add personnel modal
 $("#add-btn").click(function () {
 
     $.ajax({
@@ -138,6 +138,35 @@ $("#add-btn").click(function () {
             if (result.status.name == "ok") {
                 for (var i = 0; i < result.data.length; i++) {
                     $("#addEmployeeLocation").append(
+                        $("<option>", {
+                            text: result.data[i].location,
+                            value: result.data[i].id,
+
+                        })
+                    );
+                }
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        },
+    });
+
+});
+
+//Generating Location list for add department modal
+$("#add-location").click(function () {
+
+    $.ajax({
+        url: "./php/getAllLocations.php",
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+
+            if (result.status.name == "ok") {
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#locationSelectForAddDept").append(
                         $("<option>", {
                             text: result.data[i].location,
                             value: result.data[i].id,
@@ -182,3 +211,47 @@ $("#submit-btn").click(function () {
 
 });
 
+//Adding new location to database via modal
+
+$("#loc-submit-btn").click(function () {
+
+
+    $.ajax({
+        url: "./php/insertLocation.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+
+            name: $('#addLocationName').val(),
+            
+        },
+        success: function (data, status) {
+            console.log(status, 'add new location');
+        }
+
+    });
+
+});
+
+//Adding new department to database via modal
+
+$("#dep-submit-btn").click(function () {
+
+
+    $.ajax({
+        url: "./php/insertDepartment.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+
+            name: $('#departmentName').val(),
+            locationID: $('#locationSelectForAddDept').val()
+            
+        },
+        success: function (data, status) {
+            console.log(status, 'add new location');
+        }
+
+    });
+
+});
