@@ -98,11 +98,11 @@
 											required>
 											<!--Dynamically Populated-->
 										</select>
-										<label for="addEmployeeDepartment">Department</label>
+										<label for="addEmployeeDepartment">Departments</label>
 									</div>
 									<div class="form-floating mb-3">
-										<select class="form-select locationSelect" id="addEmployeeLocation" disabled
-											read-only>
+										<select class="form-select locationSelect" id="addEmployeeLocation" 
+											disabled>
 											<!--Dynamically Populated-->
 										</select>
 										<label for="addEmployeeLocation">Location</label>
@@ -123,7 +123,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Add</button>
+						<button type="button" class="btn btn-primary" id="submit-btn">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -189,7 +189,7 @@
 			<div id="department-card" class="card tab-pane fade mb-3" role="tabpanel" aria-labelledby="department-tab">
 				<h5 class="card-header bg-primary text-white">Departments</h5>
 				<div class="card-body">
-					<table id="department-table" class="table table-striped table-hover">
+					<table id="department-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
 								<th class="id" scope="col">ID</th>
@@ -215,15 +215,19 @@
 			<div id="location-card" class="card tab-pane fade mb-3" role="tabpanel" aria-labelledby="location-tab">
 				<h5 class="card-header bg-primary text-white">Locations</h5>
 				<div class="card-body">
-					<table id="location-table" class="table table-striped table-hover">
+					<table id="location-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-								<th class="id" scope="col">ID</th>
+								<!--<th class="id" scope="col">ID</th>-->
 								<th scope="col">Location</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody id="location-table-body">
+							<tr>
+
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				

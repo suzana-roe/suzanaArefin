@@ -1,11 +1,11 @@
 $(document).ready(function () {
     populatePersonnelTable();
     populateDepartmentTable();
+    populateLocationTable();
 
 });
 
-
-
+//Generating Personnel Table 
 function populatePersonnelTable() {
     $.ajax({
         url: "./php/getAll.php",
@@ -15,7 +15,7 @@ function populatePersonnelTable() {
 
             let data = results["data"];
             let tr = ``;
-            console.log('populate', data)
+            console.log('populate personnel', data)
 
 
             for (let i = 0; i < data.length; i++) {
@@ -37,6 +37,7 @@ function populatePersonnelTable() {
 
 }
 
+//Generating Department Table 
 function populateDepartmentTable() {
     $.ajax({
         url: "./php/getAllDepartments.php",
@@ -67,8 +68,117 @@ function populateDepartmentTable() {
 
 }
 
+//Generating Location Table 
+function populateLocationTable() {
+    $.ajax({
+        url: "./php/getAllLocations.php",
+        type: 'GET',
+        dataType: 'json',
+        success: function (results) {
+
+            let data = results["data"];
+            let tr = ``;
+            console.log('populate location', data)
 
 
+            for (let i = 0; i < data.length; i++) {
+                tr += `<tr>
+                <td>${data[i].location}</td>
+
+                    </tr>`;
+            };
+
+            $('#location-table-body').html(tr);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
+        }
+    });
+
+}
+
+//Generating Department list for add personnel modal
+$("#add-btn").click(function () {
+
+    $.ajax({
+        url: "./php/getAllDepartments.php",
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+
+            if (result.status.name == "ok") {
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#addEmployeeDepartment").append(
+                        $("<option>", {
+                            value: result.data[i].id,
+                            text: result.data[i].name,
+                        })
+                    );
+                }
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        },
+    });
+
+});
+
+//Generating Location list for ddd personnel modal
+$("#add-btn").click(function () {
+
+    $.ajax({
+        url: "./php/getAllLocations.php",
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+
+            if (result.status.name == "ok") {
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#addEmployeeLocation").append(
+                        $("<option>", {
+                            text: result.data[i].location,
+                            value: result.data[i].id,
+
+                        })
+                    );
+                }
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        },
+    });
+
+});
+
+//Adding new personnel to database via modal
+
+$("#submit-btn").click(function () {
 
 
+    $.ajax({
+        url: "./php/insertPersonnel.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+
+            firstName: $('#addEmployeeFirstName').val(),
+            lastName: $('#addEmployeeLastName').val(),
+            email: $('#addEmployeeEmail').val(),
+            jobTitle: $('#addEmployeeJobTitle').val(),
+            departmentID: $('#addEmployeeDepartment').val()
+            
+
+        },
+        success: function (data, status) {
+            console.log(status, 'add new personnel');
+        }
+
+    });
+
+});
 
