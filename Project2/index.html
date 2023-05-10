@@ -100,7 +100,7 @@
 										<label for="addEmployeeDepartment">Departments</label>
 									</div>
 									<div class="form-floating mb-3">
-										<select class="form-select locationSelect" id="addEmployeeLocation">
+										<select class="form-select locationSelect" id="addEmployeeLocation" disabled>
 											<!--Dynamically Populated-->
 										</select>
 										<label for="addEmployeeLocation">Location</label>
@@ -225,6 +225,7 @@
 						data-bs-target="#add-depmodal" title="add">Department</button>
 					<button type="button" id="add-location" class="btn" data-bs-toggle="modal"
 						data-bs-target="#add-locmodal" title="add">Location</button>
+
 				</ul>
 			</li>
 		</ul>
@@ -242,15 +243,15 @@
 				<div class="card-body">
 					<table id="personnel-table" class="table table-striped table-hover table-bordered">
 						<thead>
-							<tr>
-
+							<tr">
+								<th scope="col">ID</th>
 								<th scope="col">First Name</th>
 								<th scope="col">Last Name</th>
 								<!--<th scope="col" class="d-none d-md-table-cell">Email</th>-->
 								<th scope="col" class="d-none d-md-table-cell">Department</th>
 								<th scope="col" class="d-none d-md-table-cell">Location</th>
 								<th>Actions</th>
-							</tr>
+								</tr>
 						</thead>
 						<tbody id=personnel-table-body>
 							<tr>
@@ -316,13 +317,169 @@
 			</div>
 			<!-- End of Location Table Card-->
 
+			<!-- DELETION CONFIRMATION -->
+			<div id="confirmDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Confirm Deletion</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="deletionFeedback" class="feedbackMessage"></div>
+							<p class="fs-5 text-center">Do you really want to delete <span
+									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button id="confirmDeletionButton" type="button" class="btn btn-primary btn">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- View user MODAL -->
+			<div id="userSelectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100"><span id="userSelectModalLabel"></span>
+								<span id="userSelectModalLabel"></span>
+							</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<form id="userSelectModalForm">
+							<div class="modal-body">
+								<!-- View user Form -->
+								<div class="container">
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="user_id" placeholder="User ID"
+											disabled readonly>
+										<label for="user_id">User ID:</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="user_firstName"
+											placeholder="First Name" disabled readonly>
+										<label for="user_firstName">First Name:</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="user_lastName"
+											placeholder="Last Name" disabled readonly>
+										<label for="user_lastName">Last Name:</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="user_department"
+											placeholder="Department" disabled readonly>
+										<label for="user_department">Department:</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="user_email" placeholder="Email"
+											disabled readonly>
+										<label for="user_email">Email:</label>
+									</div>
+								</div>
+							</div>
+							<!--<div class="modal-footer justify-content-center">
+								<button type="submit" class="btn btn-primary">Update</button>
+								<button type="submit" class="btn btn-primary">Delete</button>
+							</div>-->
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- EDIT EMPLOYEE MODAL -->
+			<div id="editEmployee" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100"><span id="editEmployeeFirstNameLabel"></span>
+								<span id="editEmployeeLastNameLabel"></span>
+							</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<form id="editEmployeeForm">
+							<div class="modal-body">
+								<!-- Edit Employee Form -->
+								<div class="container">
+									<div id="editEmployeeFeedback" class="feedbackMessage"></div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="editEmployeeFirstName"
+											placeholder="First Name" required>
+										<label for="editEmployeeFirstName">First Name</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="editEmployeeLastName"
+											placeholder="Last Name" required>
+										<label for="editEmployeeLastName">Last Name</label>
+									</div>
+									<div class="form-floating mb-3">
+										<select class="form-select editEmployee departmentSelect"
+											id="editEmployeeDepartment">
+											<!--Dynamically Populated-->
+										</select>
+										<label for="editEmployeeDepartment">Department</label>
+									</div>
+									
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="editEmployeeJobTitle"
+											name="jobTitle" placeholder="Enter Name" required>
+										<label for="editEmployeeJobTitle">Job Title</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="editEmployeeEmail" name="email"
+											placeholder="Enter Name" required>
+										<!-- Dynamically Populated -->
+										<label for="editEmployeeEmail">Email Address</label>
+									</div>
+									<input type="hidden" id="editEmployeeId">
+									<input type="hidden" id="editEmployeeOrigDeptId">
+									<input type="hidden" id="editEmployeeOrigLocId">
+									<input type="hidden" id="editEmployeeOrigJob">
+									<input type="hidden" id="editEmployeeOrigEmail">
+								</div>
+							</div>
+							<div class="modal-footer justify-content-center">
+								<button id="Update-btn" type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- UPDATE CONFIRMATION -->
+			<div id="confirmUpdate" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Confirm Update</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p class="fs-5 text-center">Please confirm that you want to update <span
+									id="confirmUpdateName"></span></p>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button id="confirmUpdateButton" type="button" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<!-- End of Table Content -->
 
 	</main>
 	<!-- Main Section End -->
 
-	<!-- Add Personnel Modal -->
+
 
 
 
