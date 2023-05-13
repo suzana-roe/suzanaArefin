@@ -1,9 +1,5 @@
 <?php
-
-	// example use from browser
-	// http://localhost/companydirectory/libs/php/getAllDepartments.php
-
-	// remove next two lines for production	
+	// remove next two lines for production
 	
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
@@ -31,11 +27,26 @@
 		exit;
 
 	}	
+	
+	$query = 'SELECT p.id, p.lastName, p.firstName, p.jobTitle, p.email, d.name as department, l.name as location FROM personnel p LEFT JOIN department d ON (d.id = p.departmentID) LEFT JOIN location l ON (l.id = d.locationID)'; 
 
-	// SQL does not accept parameters and so is not prepared
+	if (isset($_GET['lastName'])) {
+		$lastName = htmlspecialchars(strip_tags($_GET['lastName']));
+		$query.= ' WHERE p.lastName REGEXP \'^' . $lastName . '\'';
+		$query.= 'ORDER BY p.lastName, p.firstName, d.name, l.name';
+	}
+	
+	if (isset($_GET['deptID'])) {
+		$deptID = htmlspecialchars(strip_tags($_GET['deptID']));
+		$query.= ' WHERE d.id = "' . $deptID . '"';
+		$query.= 'ORDER BY p.lastName, p.firstName, d.name, l.name';
+	}
 
-	$query = 'SELECT d.id, d.name, d.locationID, l.name as location FROM department d LEFT JOIN location l ON (l.id = d.locationID)';
-
+	if (isset($_GET['location'])) {
+		$location = htmlspecialchars(strip_tags($_GET['location']));
+		$query.= ' WHERE l.id = "' . $location . '"';
+		$query.= 'ORDER BY p.lastName, p.firstName, d.name, l.name';
+	}
 
 	$result = $conn->query($query);
 	
@@ -52,9 +63,9 @@
 
 		exit;
 
-	}
-   
-   	$data = [];
+    }
+    
+    $data = [];
 
 	while ($row = mysqli_fetch_assoc($result)) {
 
@@ -70,6 +81,6 @@
 	
 	mysqli_close($conn);
 
-	echo json_encode($output); 
+    echo json_encode($output);
 
 ?>

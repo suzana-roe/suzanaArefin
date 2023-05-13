@@ -36,8 +36,15 @@
 					</li>
 
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+				<form class="d-flex" onsubmit="searchPersonal(event)">
+					<input class="form-control me-2 search-field" type="search" placeholder="Search by name"
+						aria-label="Search" id="searchByName">
+					<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
+						<option selected value="">Search by department</option>
+					</select>
+					<select class="form-select me-2 search-field locationList" id="searchByLocation">
+						<option selected value="">Search by location</option>
+					</select>
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 			</div>
@@ -105,7 +112,7 @@
 										</select>
 										<label for="addEmployeeLocation">Location</label>
 									</div>
-									<div class="form-floating mb-3">
+									<div class="form-floating mb-3" >
 										<input type="text" class="form-control" id="addEmployeeJobTitle" name="jobTitle"
 											placeholder="Enter Name" required>
 										<label for="addEmployeeJobTitle">Job Title</label>
@@ -277,7 +284,7 @@
 							<tr>
 								<th class="id" scope="col">ID</th>
 								<th scope="col">Department</th>
-								<!--<th scope="col" class="d-none d-md-table-cell">Location</th>-->
+								<th scope="col">Location</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -301,7 +308,7 @@
 					<table id="location-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-								<!--<th class="id" scope="col">ID</th>-->
+								<th class="id" scope="col">ID</th>
 								<th scope="col">Location</th>
 								<th>Actions</th>
 							</tr>
@@ -317,7 +324,7 @@
 			</div>
 			<!-- End of Location Table Card-->
 
-			<!-- DELETION CONFIRMATION -->
+			<!-- PERSONNEL DELETION CONFIRMATION -->
 			<div id="confirmDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
 				tabindex="-1" role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
@@ -329,7 +336,7 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Do you really want to delete <span
+							<p class="fs-5 text-center">Do you really want to delete this personnel<span
 									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
@@ -338,6 +345,8 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- END OF PERSONNEL DELETION CONFIRMATION-->
 
 			<!-- View user MODAL -->
 			<div id="userSelectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -425,7 +434,7 @@
 										</select>
 										<label for="editEmployeeDepartment">Department</label>
 									</div>
-									
+
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="editEmployeeJobTitle"
 											name="jobTitle" placeholder="Enter Name" required>
@@ -446,6 +455,167 @@
 							</div>
 							<div class="modal-footer justify-content-center">
 								<button id="Update-btn" type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- DEPARTMENT DELETION CONFIRMATION -->
+			<!--Successful deletion-->
+			<div id="departmentDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Confirm Deletion</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="deletionFeedback" class="feedbackMessage"></div>
+							<p class="fs-5 text-center">Do you really want to delete this department<span
+									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button onclick= "deletedepartmentbyId()" id="departmentDeletionButton" type="button"
+								class="btn btn-primary btn">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Unsuccessful deletion-->
+			<div id="nodepartmentDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Cannot delete department.</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="deletionFeedback" class="feedbackMessage"></div>
+							<p class="fs-5 text-center">Deletion has been unsuccessful<span
+									id="confirmDeletionName"></span>.<br>There are personnel dependencies.</p>
+						</div>
+						<!--<div class="modal-footer justify-content-center">
+							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
+						</div>-->
+					</div>
+				</div>
+			</div>
+
+			<!-- END OF DEPARTMENT DELETION CONFIRMATION-->
+
+			<!-- SUCCESSFUL LOCATION DELETION CONFIRMATION -->
+			<div id="locationDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Confirm Deletion</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="deletionFeedback" class="feedbackMessage"></div>
+							<p class="fs-5 text-center">Do you really want to delete this location<span
+									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button onclick= "deletelocationbyId()" id="locationDeletionButton" type="button"
+								class="btn btn-primary btn">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Unsuccessful location deletion-->
+			<div id="nolocationDeletion" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100">Cannot delete location.</h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div id="deletionFeedback" class="feedbackMessage"></div>
+							<p class="fs-5 text-center">Deletion has been unsuccessful<span
+									id="confirmDeletionName"></span>.<br>There are department dependencies.</p>
+						</div>
+						<!--<div class="modal-footer justify-content-center">
+							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
+						</div>-->
+					</div>
+				</div>
+			</div>
+
+			<!-- END OF LOCATION DELETION CONFIRMATION-->
+
+			<!-- EDIT DEPARTMENT MODAL -->
+			<div id="editDepartment" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100"><span id="editDepartmentLabel"></span></h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<form id="editDepartmentForm">
+							<div class="modal-body">
+								<div class="container">
+									<div id="editDepartmentFeedback" class="feedbackMessage"></div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="editDepartmentName"
+											name="departmentName" placeholder="Enter Name" required>
+										<label for="editDepartmentName">Department Name</label>
+									</div>
+									<div class="form-floating mb-3">
+										<select class="form-select locationSelect"
+											id="editDepartmentLocationSelect"></select>
+										<!-- Dynamically Populated -->
+										<label for="editDepartmentLocationSelect">Location</label>
+									</div>
+									<input type="hidden" id="editDepartmentOrigLocation">
+									<input type="hidden" id="editDepartmentId">
+								</div>
+							</div>
+							<div class="modal-footer justify-content-center">
+								<button id="depUpdate-btn" type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- EDIT LOCATION MODAL -->
+			<div id="editLocation" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header bg-primary text-light">
+							<h4 class="fs-4 text-center modal-title w-100"><span id="editLocationLabel"></span></h4>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<form id="editLocationForm">
+							<div class="modal-body">
+								<div class="container">
+									<div id="editLocationFeedback" class="feedbackMessage"></div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="editLocationName"
+											name="locationName" placeholder="Enter Name" required>
+										<label for="editLocationName">Location Name</label>
+									</div>
+									<input type="hidden" id="editLocationId">
+								</div>
+							</div>
+							<div class="modal-footer justify-content-center">
+								<button id="locUpdate-btn" type="submit" class="btn btn-primary">Update</button>
 							</div>
 						</form>
 					</div>
