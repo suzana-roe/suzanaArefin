@@ -26,7 +26,7 @@
 
 	$query = $conn->prepare('UPDATE location SET name = ? WHERE id = ?');
 
-	$query->bind_param("si", $_REQUEST['name'], $_REQUEST['locationID']);
+	$query->bind_param("si", $_REQUEST['name'], $_REQUEST['id']);
 
 	$query->execute();
 	

@@ -26,7 +26,7 @@
 
 	$query = $conn->prepare('UPDATE department SET name = ?, locationID = ? WHERE id = ?');
 
-	$query->bind_param("sii", $_REQUEST['name'], $_REQUEST['locationID'], $_REQUEST['departmentID']);
+	$query->bind_param("sii", $_REQUEST['name'], $_REQUEST['locationID'], $_REQUEST['id']);
 
 	$query->execute();
 	

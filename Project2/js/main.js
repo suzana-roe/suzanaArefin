@@ -5,7 +5,6 @@ $(document).ready(function () {
 
 });
 
-let activedepartment;
 
 //Generating Personnel Table 
 function populatePersonnelTable() {
@@ -111,7 +110,7 @@ function populateLocationTable() {
 
 }
 
-//Generating Department list for add personnel modal
+//Generating Department list for add/edit personnel/department modal
 function populateDepartmentlist() {
 
     $.ajax({
@@ -157,7 +156,9 @@ $("#add-btn").click(function () {
     populateDepartmentlist()
 });
 
-
+$("#searchByDepartment").click(function () {
+    populateDepartmentlist()
+});
 
 //Generating Location list for add personnel and add department modals
 function populateLocationlist() {
@@ -186,6 +187,12 @@ function populateLocationlist() {
 
                         })
                     );
+                    $('#editDepartmentLocationSelect').append(
+                        $("<option>", {
+                            value: result.data[i].id,
+                            text: result.data[i].location,
+                        })
+                    );
                     $("#searchByLocation").append(
                         $("<option>", {
                             text: result.data[i].location,
@@ -212,6 +219,9 @@ $("#add-department").click(function () {
     populateLocationlist()
 });
 
+$("#searchByLocation").click(function () {
+    populateLocationlist()
+});
 
 //CRUD OPERATORS//CREATE
 
@@ -427,12 +437,14 @@ function editpersonnelbyId(editId) {
 };
 
 
+$('#confirmUpdateButton').on('click', event => {
+    $('#confirmUpdate').modal('hide');
+})
 
-//UPDATE //Confirming edit personnel
+//UPDATE //CONFIRM UPDATE PERSONNEL BY ID
 
 $('#Update-btn').on('click', event => {
     $('#editEmployee').modal('hide');
-    $('#confirmUpdate').modal('show');
 
 
     $.ajax({
@@ -449,11 +461,15 @@ $('#Update-btn').on('click', event => {
         },
         success: function (result) {
             console.log(result, "confirm edit personnel")
+            $("#feedback-title").text("Update successful.")
+            $("#feedback-message").text("Personnel update has been successful")
+            $('#confirmUpdate').modal('show')
 
-            $('#confirmUpdateButton').on('click', event => {
+            /*$('#confirmUpdateButton').on('click', event => {
                 $('#confirmUpdate').modal('hide');
                 populatePersonnelTable()
-            })
+            })*/
+            populatePersonnelTable()
 
         },
         error: function (result) {
@@ -463,7 +479,7 @@ $('#Update-btn').on('click', event => {
 })
 
 
-//DELETE //Getting personnel dependencies for department by ID
+//DELETE //Getting personnel dependencies for DELETING department by ID
 function departmentdependencies(id) {
 
 
@@ -523,122 +539,8 @@ function deletedepartmentbyId() {
 
 };
 
-//UPDATE // UPDATE DEPARTMENT BY ID
-function editdepartmentbyId(depId) {
 
-    $('#editDepartment').modal('show');
-
-    $.ajax({
-        type: "GET",
-        url: "./php/getDepartmentByID.php",
-        data: {
-            id: depId,
-        },
-        success: function (result) {
-
-            $('#editDepartmentName').val(result['data'][0]['name']);
-            $('#editDepartmentLocationSelect').val(result['data'][0]['locationID']);
-            $('#depUpdate-btn').val(result['data'][0]['id']);
-
-
-            console.log(result, "update department")
-
-            populateDepartmentTable();
-
-        },
-        error: function (result) {
-            alert('error');
-        }
-    });
-}
-
-//UPDATE //Confirming edit department
-
-$('#depUpdate-btn').on('click', event => {
-    $('#editDepartment').modal('hide');
-    $('#confirmUpdate').modal('show');
-
-    $.ajax({
-        url: "./php/updateDepartmentByID.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            name: $('#editDepartmentName').val(),
-            locationID: $('#editDepartmentLocationSelect').val(),
-            id: $('#depUpdate-btn').val(),
-        },
-        success: function (result) {
-            console.log(result, "confirm update department")
-
-                ('#confirmUpdateButton').on('click', event => {
-                    $('#confirmUpdate').modal('hide');
-                })
-
-        },
-        error: function (result) {
-            alert('error');
-        }
-    });
-})
-
-
-
-//UPDATE // UPDATE location BY ID
-function editlocationbyId(locId) {
-
-    $('#editLocation').modal('show');
-
-
-    $.ajax({
-        type: "GET",
-        url: "./php/getLocationByID.php",
-        data: {
-            id: locId,
-        },
-        success: function (result) {
-
-            $('#editLocationName').val(result['data'][0]['name']);
-
-
-            console.log(result, "update location")
-
-        },
-        error: function (result) {
-            alert('error');
-        }
-    });
-}
-
-//UPDATE //CONFIRM UPDATE LOCATION BY ID
-
-$('#locUpdate-btn').on('click', event => {
-    $('#confirmUpdate').modal('show');
-
-    $.ajax({
-        url: "./php/updateLocationByID.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            name: $('#editLocationName').val(),
-            id: $('#Update-btn').val(),
-        },
-        success: function (result) {
-            console.log(result, "confirm update location")
-
-                ('#confirmUpdateButton').on('click', event => {
-                    $('#confirmUpdate').modal('hide');
-                })
-
-        },
-        error: function (result) {
-            alert('error');
-        }
-    });
-
-
-})
-
-//DELETE //Getting department dependencies for location by ID
+//DELETE //Getting department dependencies for DELETING location by ID
 function locationdependencies(id) {
 
     $.ajax({
@@ -692,6 +594,135 @@ function deletelocationbyId() {
 
 };
 
+//UPDATE //Getting a department's details by ID for editing
+function editdepartmentbyId(depId) {
+
+    $('#editDepartment').modal('show');
+    populateLocationlist()
+
+    $.ajax({
+        type: "GET",
+        url: "./php/getDepartmentByID.php",
+        data: {
+            id: depId,
+        },
+        success: function (result) {
+
+            $('#editDepartmentName').val(result['data'][0]['name']);
+            $('#editDepartmentLocationSelect').val(result['data'][0]['locationID']);
+            $('#depUpdate-btn').val(result['data'][0]['id']);
+
+
+            console.log(result, "update department")
+
+            populateDepartmentTable();
+
+        },
+        error: function (result) {
+            alert('error');
+        }
+    });
+}
+
+//UPDATE //CONFIRM UPDATE DEPARTMENT BY ID
+
+$('#depUpdate-btn').on('click', event => {
+    $('#editDepartment').modal('hide');
+  
+
+    $.ajax({
+        url: "./php/updateDepartmentByID.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            name: $('#editDepartmentName').val(),
+            locationID: $('#editDepartmentLocationSelect').val(),
+            id: $('#depUpdate-btn').val(),
+        },
+        success: function (result) {
+            console.log(result, "confirm update department")
+            $("#feedback-title").text("Update successful.")
+            $("#feedback-message").text("Department update has been successful")
+            $('#confirmUpdate').modal('show')
+                /*('#confirmUpdateButton').on('click', event => {
+                    $('#confirmUpdate').modal('hide');
+                })*/
+
+                populateDepartmentTable()
+
+        },
+        error: function (result) {
+            alert('error');
+        }
+    });
+})
+
+//UPDATE //Getting a location's details by ID for editing
+function editlocationbyId(locId) {
+
+    $('#editLocation').modal('show');
+
+
+    $.ajax({
+        type: "GET",
+        url: "./php/getLocationByID.php",
+        data: {
+            id: locId,
+        },
+        success: function (result) {
+
+            $('#editLocationName').val(result['data'][0]['name']);
+            $('#locUpdate-btn').val(result['data'][0]['id'])
+
+
+
+            console.log(result, "update location")
+            populateLocationTable()
+
+        },
+        error: function (result) {
+            alert('error');
+        }
+    });
+}
+
+//UPDATE //CONFIRM UPDATE LOCATION BY ID
+
+$('#locUpdate-btn').on('click', event => {
+    $('#editLocation').modal('hide');
+
+
+    $.ajax({
+        url: "./php/updateLocationByID.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            name: $('#editLocationName').val(),
+            id: $('#locUpdate-btn').val(),
+        },
+        success: function (result) {
+            console.log(result, "confirm update location")
+            $("#feedback-title").text("Update successful.")
+            $("#feedback-message").text("Location update has been successful")
+            $('#confirmUpdate').modal('show')
+
+                /*('#confirmUpdateButton').on('click', event => {
+                    $('#confirmUpdate').modal('hide');
+                })*/
+
+                populateLocationTable()
+
+        },
+        error: function (result) {
+            alert('error');
+        }
+    });
+
+
+})
+
+
+//SEARCH
 function searchPersonal(event) {
     event.preventDefault();
     
@@ -705,7 +736,24 @@ function searchPersonal(event) {
         },
         success: function(result) {
             console.log(result, 'search')
-            populatePersonnelTable();
+            let data = result["data"];
+            let tr = ``;
+
+
+            for (let i = 0; i < data.length; i++) {
+                tr += `<tr>
+                <td>${data[i].id}</td>
+                <td>${data[i].lastName}</td>
+                <td>${data[i].firstName}</td> 
+                <td>${data[i].department}</td> 
+                <td>${data[i].location}</td>
+                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                
+               
+                </tr>`;
+            };
+
+            $('#personnel-table-body').html(tr);
             $('#Navpersonnel').click();
  
             

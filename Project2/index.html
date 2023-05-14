@@ -37,8 +37,8 @@
 
 				</ul>
 				<form class="d-flex" onsubmit="searchPersonal(event)">
-					<input class="form-control me-2 search-field" type="search" placeholder="Search by name"
-						aria-label="Search" id="searchByName">
+					<input class="form-control me-2 search-field" type="search" placeholder="Search by last name"
+						aria-label="Search" id="searchByLastName">
 					<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
 						<option selected value="">Search by department</option>
 					</select>
@@ -412,7 +412,7 @@
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<form id="editEmployeeForm">
+					
 							<div class="modal-body">
 								<!-- Edit Employee Form -->
 								<div class="container">
@@ -456,7 +456,7 @@
 							<div class="modal-footer justify-content-center">
 								<button id="Update-btn" type="submit" class="btn btn-primary">Update</button>
 							</div>
-						</form>
+				
 					</div>
 				</div>
 			</div>
@@ -565,7 +565,7 @@
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<form id="editDepartmentForm">
+						
 							<div class="modal-body">
 								<div class="container">
 									<div id="editDepartmentFeedback" class="feedbackMessage"></div>
@@ -587,7 +587,7 @@
 							<div class="modal-footer justify-content-center">
 								<button id="depUpdate-btn" type="submit" class="btn btn-primary">Update</button>
 							</div>
-						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -602,7 +602,7 @@
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<form id="editLocationForm">
+						
 							<div class="modal-body">
 								<div class="container">
 									<div id="editLocationFeedback" class="feedbackMessage"></div>
@@ -617,7 +617,7 @@
 							<div class="modal-footer justify-content-center">
 								<button id="locUpdate-btn" type="submit" class="btn btn-primary">Update</button>
 							</div>
-						</form>
+					
 					</div>
 				</div>
 			</div>
@@ -627,17 +627,14 @@
 				role="dialog">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
-						<div class="modal-header bg-primary text-light">
-							<h4 class="fs-4 text-center modal-title w-100">Confirm Update</h4>
+						<div id="feedback-type" class="modal-header bg-success text-light">
+							<h4 id="feedback-title" class="fs-4 text-center modal-title w-100"></h4>
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<p class="fs-5 text-center">Please confirm that you want to update <span
+							<p id="feedback-message" class="fs-5 text-center"><span
 									id="confirmUpdateName"></span></p>
-						</div>
-						<div class="modal-footer justify-content-center">
-							<button id="confirmUpdateButton" type="button" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</div>
