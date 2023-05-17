@@ -255,8 +255,9 @@ $("#submit-btn").click(function () {
             populatePersonnelTable();
             $('#add-modal').modal("hide");
         },
-        error: function (result) {
-            alert('error');
+        
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
 
     });
@@ -283,8 +284,8 @@ $("#loc-submit-btn").click(function () {
             populateLocationTable();
             $('#add-locmodal').modal("hide");
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
 
     });
@@ -312,8 +313,8 @@ $("#dep-submit-btn").click(function () {
             populateDepartmentTable();
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
 
     });
@@ -368,8 +369,8 @@ function viewpersonnelbyid(personnelId) {
             $('#userSelectModal').modal('show');
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 };
@@ -396,8 +397,8 @@ function deletepersonnelbyId(deleteId) {
                 populatePersonnelTable();
 
             },
-            error: function (result) {
-                alert('error');
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('error');
             }
         });
     })
@@ -438,8 +439,8 @@ function editpersonnelbyId(editId) {
 
 
         },
-        error: function (results) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 
@@ -481,8 +482,8 @@ $('#Update-btn').on('click', event => {
             populatePersonnelTable()
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 })
@@ -511,8 +512,8 @@ function departmentdependencies(id) {
             }
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 
@@ -540,8 +541,8 @@ function deletedepartmentbyId() {
             populateDepartmentTable();
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
     //})
@@ -570,8 +571,8 @@ function locationdependencies(id) {
             }
             console.log($('#locationDeletionButton').val());
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 
@@ -596,8 +597,8 @@ function deletelocationbyId() {
             populateLocationTable();
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 
@@ -627,8 +628,8 @@ function editdepartmentbyId(depId) {
             populateDepartmentTable();
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 }
@@ -660,8 +661,8 @@ $('#depUpdate-btn').on('click', event => {
             populateDepartmentTable()
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 })
@@ -689,8 +690,8 @@ function editlocationbyId(locId) {
             populateLocationTable()
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 }
@@ -722,8 +723,8 @@ $('#locUpdate-btn').on('click', event => {
             populateLocationTable()
 
         },
-        error: function (result) {
-            alert('error');
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error');
         }
     });
 
