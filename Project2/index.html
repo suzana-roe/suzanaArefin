@@ -39,15 +39,15 @@
 					</li>
 
 				</ul>
-				<form class="d-flex" onsubmit="searchPersonal(event)">
-					<input class="form-control me-2 search-field" type="search" placeholder="Search by last name"
-						aria-label="Search" id="searchByLastName">
-					<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
+				<form class="d-flex" onsubmit="searchPersonnel(event)">
+					<input class="form-control me-2 search-field" type="search" placeholder="Search"
+						aria-label="Search" id="searchBy">
+					<!--<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
 						<option selected value="">Search by department</option>
 					</select>
 					<select class="form-select me-2 search-field locationList" id="searchByLocation">
 						<option selected value="">Search by location</option>
-					</select>
+					</select>-->
 					<button class="btn btn-outline-light" type="submit">Search</button>
 				</form>
 			</div>
@@ -233,15 +233,16 @@
 				aria-labelledby="personnel-tab">
 				<h5 class="card-header text-white bg-primary">Personnel</h5>
 				<div class="card-body">
+					<div class="table-responsive">
 					<table id="personnel-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr">
-								<th scope="col">ID</th>
+								<!--<th scope="col">ID</th>-->
 								<th scope="col">First Name</th>
 								<th scope="col">Last Name</th>
 								<!--<th scope="col" class="d-none d-md-table-cell">Email</th>-->
-								<th scope="col" class="d-none d-md-table-cell">Department</th>
-								<th scope="col" class="d-none d-md-table-cell">Location</th>
+								<th scope="col">Department</th>
+								<th scope="col">Location</th>
 								<th>Actions</th>
 								</tr>
 						</thead>
@@ -251,6 +252,7 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
 				</div>
 			</div>
 			<!--<div class="card-footer">
@@ -264,10 +266,11 @@
 			<div id="department-card" class="card tab-pane fade mb-3" role="tabpanel" aria-labelledby="department-tab">
 				<h5 class="card-header bg-primary text-white">Departments</h5>
 				<div class="card-body">
+					<div class="table-responsive">
 					<table id="department-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-								<th class="id" scope="col">ID</th>
+								<!--<th class="id" scope="col">ID</th>-->
 								<th scope="col">Department</th>
 								<th scope="col">Location</th>
 								<th>Actions</th>
@@ -281,6 +284,7 @@
 						</tbody>
 					</table>
 				</div>
+				</div>
 
 			</div>
 
@@ -290,10 +294,11 @@
 			<div id="location-card" class="card tab-pane fade mb-3" role="tabpanel" aria-labelledby="location-tab">
 				<h5 class="card-header bg-primary text-white">Locations</h5>
 				<div class="card-body">
+					<div class="table-responsive">
 					<table id="location-table" class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-								<th class="id" scope="col">ID</th>
+								<!--<th class="id" scope="col">ID</th>-->
 								<th scope="col">Location</th>
 								<th>Actions</th>
 							</tr>
@@ -304,6 +309,7 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
 				</div>
 
 			</div>
@@ -325,11 +331,11 @@
 							<div class="modal-body">
 								<!-- View user Form -->
 								<div class="container">
-									<div class="form-floating mb-3">
+									<!--<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_id" placeholder="ID" disabled
 											readonly>
 										<label for="ID">ID:</label>
-									</div>
+									</div>-->
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_firstName"
 											placeholder="First Name" disabled readonly>
@@ -340,16 +346,16 @@
 											placeholder="Last Name" disabled readonly>
 										<label for="user_lastName">Last Name:</label>
 									</div>
-									<div class="form-floating mb-3">
+									<!--<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_jobTitle"
 											placeholder="Job Title" disabled readonly>
 										<label for="user_jobTitle">Job Title:</label>
-									</div>
-									<div class="form-floating mb-3">
+									</div>-->
+									<!--<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_department"
 											placeholder="Department" disabled readonly>
 										<label for="user_department">Department:</label>
-									</div>
+									</div>-->
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_email" placeholder="Email"
 											disabled readonly>

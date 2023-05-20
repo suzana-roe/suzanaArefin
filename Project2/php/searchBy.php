@@ -1,0 +1,68 @@
+<?php
+
+	$executionStartTime = microtime(true);
+
+	include("config.php");
+
+	#header('Content-Type: application/json; charset=UTF-8');
+
+	$conn = new mysqli("213.171.200.21","suzanaarefin","hello1234@","CompanyDirectory");
+
+	if (mysqli_connect_errno()) {
+		
+		$output['status']['code'] = "300";
+		$output['status']['name'] = "failure";
+		$output['status']['description'] = "database unavailable";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = [];
+
+		mysqli_close($conn);
+
+		echo json_encode($output);
+
+		exit;
+
+	}	
+
+    $searchTerm = "%" . $_REQUEST["lastName"] . "%";
+    $searchTerm = "%" . $_REQUEST["firstName"] . "%";
+    $searchTerm = "%" . $_REQUEST["department"] . "%";
+    $searchTerm = "%" . $_REQUEST["location"] . "%";
+    $sqlStr = "SELECT p.id, p.lastName as lastName, p.firstName, p.jobTitle, p.email, d.name as department, l.name as location FROM personnel p LEFT JOIN department d ON (p.departmentID = d.id) LEFT JOIN location l ON (d.locationID = l.id) WHERE (p.firstName LIKE '$searchTerm' OR p.lastName LIKE '$searchTerm' OR d.name LIKE '$searchTerm' OR l.name LIKE '$searchTerm')";
+
+	$result = $conn->query($sqlStr);
+	
+	if (!$result) {
+
+		$output['status']['code'] = "400";
+		$output['status']['name'] = "executed";
+		$output['status']['description'] = "query failed";	
+		$output['data'] = [];
+
+		mysqli_close($conn);
+
+		echo json_encode($output); 
+
+		exit;
+
+	}
+   
+   	$data = [];
+
+	while ($row = mysqli_fetch_assoc($result)) {
+
+		array_push($data, $row);
+
+	}
+
+	$output['status']['code'] = "200";
+	$output['status']['name'] = "ok";
+	$output['status']['description'] = "success";
+	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+	$output['data'] = $data;
+	
+	mysqli_close($conn);
+
+	echo json_encode($output); 
+
+?>

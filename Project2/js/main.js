@@ -23,9 +23,9 @@ function populatePersonnelTable() {
 
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
-                <td>${data[i].id}</td>
-                <td>${data[i].lastName}</td>
+                
                 <td>${data[i].firstName}</td> 
+                <td>${data[i].lastName}</td>
                 <td>${data[i].department}</td> 
                 <td>${data[i].location}</td>
                 <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
@@ -34,7 +34,9 @@ function populatePersonnelTable() {
                 </tr>`;
             };
 
-            $('#personnel-table-body').html(tr);
+            $('#personnel-table-body').html(tr).sort(function (a, b) {
+                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
+              });
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -62,7 +64,6 @@ function populateDepartmentTable() {
 
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
-                <td>${data[i].id}</td>
                 <td>${data[i].name}</td>
                 <td>${data[i].location}</td>
                 <td><button  data-id="${data[i].id}"  onclick="departmentdependencies('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editdepartmentbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
@@ -98,7 +99,6 @@ function populateLocationTable() {
 
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
-                <td>${data[i].id}</td>
                 <td>${data[i].location}</td>
                 <td><button data-id="${data[i].id}" onclick="locationdependencies('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editlocationbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
 
@@ -368,10 +368,10 @@ function viewpersonnelbyid(personnelId) {
 
 
             $('#userSelectModalLabel').html(`${result['data']['personnel'][0]['firstName']} ${result['data']['personnel'][0]['lastName']}`);
-            $('#user_id').val(result['data']['personnel'][0]['id']);
+            //$('#user_id').val(result['data']['personnel'][0]['id']);
             $('#user_firstName').val(result['data']['personnel'][0]['firstName']);
             $('#user_lastName').val(result['data']['personnel'][0]['lastName']);
-            $('#user_department').val(result['data']['personnel'][0]['departmentID']);
+            //$('#user_department').val(result['data']['personnel'][0]['departmentID']);
             $('#user_email').val(result['data']['personnel'][0]['email']);
 
 
@@ -394,7 +394,7 @@ function deletepersonnelbyId(deleteId) {
 
 
         $.ajax({
-            url: "./php/deletePersonnelbyID.php",
+            url: "./php/deletePersonnelByID.php",
             type: 'POST',
             dataType: 'json',
             data: {
@@ -749,5 +749,49 @@ $('#locUpdate-btn').on('click', event => {
 
 
 })
+
+//SEARCH BY NAME
+function searchPersonnel(event) {
+    event.preventDefault();
+
+    $.ajax({
+        url: "./php/searchBy.php",
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            department: $('#searchBy').val(),
+            location: $('#searchBy').val(),
+            lastName: $('#searchBy').val(),
+            firstName: $('#searchBy').val(),
+        },
+        success: function (result) {
+            console.log(result, 'search')
+            let data = result["data"];
+            let tr = ``;
+
+
+            for (let i = 0; i < data.length; i++) {
+                tr += `<tr>
+                <td>${data[i].firstName}</td> 
+                <td>${data[i].lastName}</td>
+                <td>${data[i].department}</td> 
+                <td>${data[i].location}</td>
+                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                
+               
+                </tr>`;
+            };
+
+            $('#personnel-table-body').html(tr);
+            $('#Navpersonnel').click();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+          console.log(jqXHR, errorThrown);
+        },
+    });
+}
+
 
 
