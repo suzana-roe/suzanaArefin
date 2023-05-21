@@ -36,12 +36,12 @@ function populatePersonnelTable() {
 
             $('#personnel-table-body').html(tr).sort(function (a, b) {
                 return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
-              });
+            });
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -77,8 +77,8 @@ function populateDepartmentTable() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -109,8 +109,8 @@ function populateLocationTable() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -152,8 +152,8 @@ function populateDepartmentlist() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -213,8 +213,8 @@ function populateLocationlist() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -261,8 +261,8 @@ $("#submit-btn").click(function () {
             $('#add-modal').modal("hide");
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
 
     });
@@ -290,8 +290,8 @@ $("#loc-submit-btn").click(function () {
             $('#add-locmodal').modal("hide");
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
 
     });
@@ -321,8 +321,8 @@ $("#dep-submit-btn").click(function () {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
 
     });
@@ -346,8 +346,8 @@ function viewdepartmentbyid(depId) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 };
@@ -366,21 +366,35 @@ function viewpersonnelbyid(personnelId) {
         success: function (result) {
             console.log(result, "specific personnel")
 
+            if (result['data']['personnel'][0]['jobTitle'] !== "") {
 
-            $('#userSelectModalLabel').html(`${result['data']['personnel'][0]['firstName']} ${result['data']['personnel'][0]['lastName']}`);
-            //$('#user_id').val(result['data']['personnel'][0]['id']);
-            $('#user_firstName').val(result['data']['personnel'][0]['firstName']);
-            $('#user_lastName').val(result['data']['personnel'][0]['lastName']);
-            //$('#user_department').val(result['data']['personnel'][0]['departmentID']);
-            $('#user_email').val(result['data']['personnel'][0]['email']);
+                $('#userSelectModalLabel').html(`${result['data']['personnel'][0]['firstName']} ${result['data']['personnel'][0]['lastName']}`);
+                //$('#user_id').val(result['data']['personnel'][0]['id']);
+                $('#user_firstName').val(result['data']['personnel'][0]['firstName']);
+                $('#user_lastName').val(result['data']['personnel'][0]['lastName']);
+                //$('#user_department').val(result['data']['personnel'][0]['departmentID']);
+                $('#user_jobTitle').val(result['data']['personnel'][0]['jobTitle']);
+                $('#user_email').val(result['data']['personnel'][0]['email']);
 
+            }
+
+            else {
+                $('#userSelectModalLabel').html(`${result['data']['personnel'][0]['firstName']} ${result['data']['personnel'][0]['lastName']}`);
+                //$('#user_id').val(result['data']['personnel'][0]['id']);
+                $('#user_firstName').val(result['data']['personnel'][0]['firstName']);
+                $('#user_lastName').val(result['data']['personnel'][0]['lastName']);
+                //$('#user_department').val(result['data']['personnel'][0]['departmentID']);
+                $('#user_jobTitle').val(result['data']['personnel'][0]['jobTitle'] = "Not Available");
+                $('#user_email').val(result['data']['personnel'][0]['email']);
+
+            }
 
             $('#userSelectModal').modal('show');
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 };
@@ -408,8 +422,8 @@ function deletepersonnelbyId(deleteId) {
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-              console.log(textStatus, errorThrown);
-              console.log(jqXHR, errorThrown);
+                console.log(textStatus, errorThrown);
+                console.log(jqXHR, errorThrown);
             },
         });
     })
@@ -451,8 +465,8 @@ function editpersonnelbyId(editId) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -495,8 +509,8 @@ $('#Update-btn').on('click', event => {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 })
@@ -525,8 +539,8 @@ function departmentdependencies(id) {
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -555,8 +569,8 @@ function deletedepartmentbyId() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
     //})
@@ -586,8 +600,8 @@ function locationdependencies(id) {
             console.log($('#locationDeletionButton').val());
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -613,8 +627,8 @@ function deletelocationbyId() {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -645,8 +659,8 @@ function editdepartmentbyId(depId) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 }
@@ -679,8 +693,8 @@ $('#depUpdate-btn').on('click', event => {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 })
@@ -709,8 +723,8 @@ function editlocationbyId(locId) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 }
@@ -742,8 +756,8 @@ $('#locUpdate-btn').on('click', event => {
             populateLocationTable()
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 
@@ -787,8 +801,8 @@ function searchPersonnel(event) {
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-          console.log(jqXHR, errorThrown);
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR, errorThrown);
         },
     });
 }
