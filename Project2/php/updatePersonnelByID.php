@@ -24,6 +24,8 @@
 
 	}	
 
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+
 	$query = $conn->prepare('UPDATE personnel SET firstName = ?, lastName = ?, email = ?, jobTitle = ?, departmentID = ? WHERE id = ?');
 
 	$query->bind_param("ssssii", $_REQUEST['firstName'], $_REQUEST['lastName'], $_REQUEST['email'], $_REQUEST['jobTitle'], $_REQUEST['departmentID'], $_REQUEST['id']);

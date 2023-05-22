@@ -1,5 +1,6 @@
 <?php
 
+// connection details for MySQL database
 $mysqli = new mysqli("213.171.200.21","suzanaarefin","hello1234@","CompanyDirectory");
 
 // Check connection

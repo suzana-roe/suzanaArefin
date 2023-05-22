@@ -25,6 +25,8 @@
 
 	}	
 
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+
 	$query = $conn->prepare('INSERT INTO location (name) VALUES(?)');
 
 	$query->bind_param("s", $_REQUEST['name']);

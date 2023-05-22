@@ -24,6 +24,8 @@
 
 	}	
 
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+
 	$query = $conn->prepare('UPDATE department SET name = ?, locationID = ? WHERE id = ?');
 
 	$query->bind_param("sii", $_REQUEST['name'], $_REQUEST['locationID'], $_REQUEST['id']);

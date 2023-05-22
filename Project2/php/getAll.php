@@ -4,7 +4,7 @@
 
 	include("config.php");
 
-	#header('Content-Type: application/json; charset=UTF-8');
+	header('Content-Type: application/json; charset=UTF-8');
 
 	$conn = new mysqli("213.171.200.21","suzanaarefin","hello1234@","CompanyDirectory");
 
@@ -26,7 +26,7 @@
 
 	// SQL does not accept parameters and so is not prepared
 
-	$query = 'SELECT p.id, p.lastName, p.firstName, p.jobTitle, p.email, d.name as department, l.name as location FROM personnel p LEFT JOIN department d ON (d.id = p.departmentID) LEFT JOIN location l ON (l.id = d.locationID) ORDER BY p.firstName';
+	$query = 'SELECT p.id, p.lastName, p.firstName, p.jobTitle, p.email, d.name as department, l.name as location FROM personnel p LEFT JOIN department d ON (d.id = p.departmentID) LEFT JOIN location l ON (l.id = d.locationID) ORDER BY p.firstName, p.lastName, d.name, l.name';
 
 	$result = $conn->query($query);
 	
