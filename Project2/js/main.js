@@ -100,7 +100,7 @@ function populateLocationTable() {
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
                 <td>${data[i].location}</td>
-                <td><button data-id="${data[i].id}" onclick="locationdependencies('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editlocationbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                <td><button data-id="${data[i].locationID}" onclick="locationdependencies('${data[i].locationID}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editlocationbyId('${data[i].locationID}')"class="btn btn fa  fa-pen custom-button"></button></td>
 
                     </tr>`;
             };
@@ -184,20 +184,20 @@ function populateLocationlist() {
                     $("#addEmployeeLocation").append(
                         $("<option>", {
                             text: result.data[i].location,
-                            value: result.data[i].id,
+                            value: result.data[i].locationID,
 
                         })
                     );
                     $("#locationSelectForAddDept").append(
                         $("<option>", {
                             text: result.data[i].location,
-                            value: result.data[i].id,
+                            value: result.data[i].locationID,
 
                         })
                     );
                     $('#editDepartmentLocationSelect').append(
                         $("<option>", {
-                            value: result.data[i].id,
+                            value: result.data[i].locationID,
                             text: result.data[i].location,
                         })
                     );
