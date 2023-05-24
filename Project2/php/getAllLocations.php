@@ -26,7 +26,7 @@
 
 	// SQL does not accept parameters and so is not prepared
 
-	$query = 'SELECT l.id as locationID, l.name as location, count(d.name) as departments FROM department d RIGHT JOIN location l ON l.id = d.locationID GROUP BY location';
+	$query = 'SELECT l.id as locationID, l.name as location, count(d.id) as departments FROM department d RIGHT JOIN location l ON l.id = d.locationID GROUP BY location';
 
 	$result = $conn->query($query);
 	
