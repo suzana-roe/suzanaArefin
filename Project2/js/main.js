@@ -364,7 +364,7 @@ function viewpersonnelbyid(personnelId) {
             id: personnelId,
         },
         success: function (result) {
-            console.log(result, "specific personnel")
+            //console.log(result, "specific personnel")
 
             if (result['data']['personnel'][0]['jobTitle'] !== "") {
 
@@ -415,7 +415,7 @@ function deletepersonnelbyId(deleteId) {
                 id: deleteId,
             },
             success: function (result) {
-                console.log(result, "delete personnel")
+                //console.log(result, "delete personnel")
                 $('#confirmDeletion').modal('hide');
 
                 populatePersonnelTable();
@@ -454,7 +454,7 @@ function editpersonnelbyId(editId) {
             $('#editEmployeeDepartment').html(data.personnel['0'].departmentID);
             $('#editEmployeeLocation').html(data.personnel['0'].location);
             $("#Update-btn").attr("userID", data.personnel['0'].id);
-            console.log(results, "update personnel")
+            //console.log(results, "update personnel")
 
 
 
@@ -496,7 +496,7 @@ $('#Update-btn').on('click', event => {
             id: $("#Update-btn").attr("userID")
         },
         success: function (result) {
-            console.log(result, "confirm edit personnel")
+            //console.log(result, "confirm edit personnel")
             $("#feedback-title").text("Update successful.")
             $("#feedback-message").text("Personnel update has been successful")
             $('#confirmUpdate').modal('show')
@@ -528,7 +528,7 @@ function departmentdependencies(id) {
             id,
         },
         success: function (result) {
-            console.log(result, "department dependencies")
+            //console.log(result, "department dependencies")
 
             if (result.data[0].employees == 0) {
 
@@ -552,7 +552,7 @@ function deletedepartmentbyId() {
     /*$('#departmentDeletionButton').on('click', event => {
         console.log($('#departmentDeletionButton').val())*/
 
-    console.log($('#departmentDeletionButton').val());
+    //console.log($('#departmentDeletionButton').val());
 
     $.ajax({
         url: "./php/deleteDepartmentByID.php",
@@ -562,7 +562,7 @@ function deletedepartmentbyId() {
             id: $('#departmentDeletionButton').val()
         },
         success: function (result) {
-            console.log(result, "delete department")
+            //console.log(result, "delete department")
             $('#departmentDeletion').modal('hide');
 
             populateDepartmentTable();
@@ -589,7 +589,7 @@ function locationdependencies(id) {
             id,
         },
         success: function (result) {
-            console.log(result, "location dependencies")
+            //console.log(result, "location dependencies")
 
             if (result.data[0].departments == 0) {
                 $('#locationDeletionButton').val(id);
@@ -620,7 +620,7 @@ function deletelocationbyId() {
             id: $('#locationDeletionButton').val()
         },
         success: function (result) {
-            console.log(result, "delete location")
+            //console.log(result, "delete location")
             $('#locationDeletion').modal('hide');
 
             populateLocationTable();
@@ -653,7 +653,7 @@ function editdepartmentbyId(depId) {
             $('#depUpdate-btn').val(result['data'][0]['id']);
 
 
-            console.log(result, "update department")
+            //console.log(result, "update department")
 
             populateDepartmentTable();
 
@@ -681,7 +681,7 @@ $('#depUpdate-btn').on('click', event => {
             id: $('#depUpdate-btn').val(),
         },
         success: function (result) {
-            console.log(result, "confirm update department")
+            //console.log(result, "confirm update department")
             $("#feedback-title").text("Update successful.")
             $("#feedback-message").text("Department update has been successful")
             $('#confirmUpdate').modal('show')
@@ -718,7 +718,7 @@ function editlocationbyId(locId) {
 
 
 
-            console.log(result, "update location")
+            //console.log(result, "update location")
             populateLocationTable()
 
         },
@@ -744,7 +744,7 @@ $('#locUpdate-btn').on('click', event => {
             id: $('#locUpdate-btn').val(),
         },
         success: function (result) {
-            console.log(result, "confirm update location")
+            //console.log(result, "confirm update location")
             $("#feedback-title").text("Update successful.")
             $("#feedback-message").text("Location update has been successful")
             $('#confirmUpdate').modal('show')
@@ -779,7 +779,7 @@ function searchPersonnel(event) {
             firstName: $('#searchBy').val(),
         },
         success: function (result) {
-            console.log(result, 'search')
+            //console.log(result, 'search')
             let data = result["data"];
             let tr = ``;
 
