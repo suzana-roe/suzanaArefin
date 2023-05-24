@@ -18,7 +18,7 @@ function populatePersonnelTable() {
 
             let data = results["data"];
             let tr = ``;
-            console.log('populate personnel', data)
+            //console.log('populate personnel', data)
 
 
             for (let i = 0; i < data.length; i++) {
@@ -59,7 +59,7 @@ function populateDepartmentTable() {
 
             let data = results["data"];
             let tr = ``;
-            console.log('populate department', data)
+            //console.log('populate department', data)
 
 
             for (let i = 0; i < data.length; i++) {
@@ -94,7 +94,7 @@ function populateLocationTable() {
 
             let data = results["data"];
             let tr = ``;
-            console.log('populate location', data)
+            //console.log('populate location', data)
 
 
             for (let i = 0; i < data.length; i++) {
@@ -124,7 +124,7 @@ function populateDepartmentlist() {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            console.log(result, 'department list')
+            //console.log(result, 'department list')
 
             if (result.status.name == "ok") {
                 for (var i = 0; i < result.data.length; i++) {
@@ -177,7 +177,7 @@ function populateLocationlist() {
         dataType: 'json',
         success: function (result) {
 
-            console.log(result, 'location list')
+            //console.log(result, 'location list')
 
             if (result.status.name == "ok") {
                 for (var i = 0; i < result.data.length; i++) {
@@ -255,7 +255,7 @@ $("#submit-btn").click(function () {
 
         },
         success: function (data, status) {
-            console.log(status, 'add new personnel');
+            //console.log(status, 'add new personnel');
 
             populatePersonnelTable();
             $('#add-modal').modal("hide");
@@ -284,7 +284,7 @@ $("#loc-submit-btn").click(function () {
 
         },
         success: function (data, status) {
-            console.log(status, 'add new location');
+            //console.log(status, 'add new location');
 
             populateLocationTable();
             $('#add-locmodal').modal("hide");
@@ -314,7 +314,7 @@ $("#dep-submit-btn").click(function () {
 
         },
         success: function (data, status) {
-            console.log(status, 'add new location');
+            //console.log(status, 'add new location');
 
             populateDepartmentTable();
             $('#add-depmodal').modal("hide");
@@ -341,7 +341,7 @@ function viewdepartmentbyid(depId) {
             id: depId,
         },
         success: function (result) {
-            console.log(result, "department")
+            //console.log(result, "department")
 
 
         },
@@ -445,15 +445,15 @@ function editpersonnelbyId(editId) {
         success: function (results) {
 
             const data = results["data"]
-            const returned_user = data.personnel['0'];
+            
 
-            $('#editEmployeeFirstName').val(returned_user.firstName);
-            $('#editEmployeeLastName').val(returned_user.lastName);
-            $('#editEmployeeEmail').val(returned_user.email);
-            $('#editEmployeeJobTitle').val(returned_user.jobTitle);
-            $('#editEmployeeDepartment').html(returned_user.departmentID);
-            $('#editEmployeeLocation').html(returned_user.location);
-            $("#Update-btn").attr("userID", returned_user.id);
+            $('#editEmployeeFirstName').val(data.personnel['0'].firstName);
+            $('#editEmployeeLastName').val(data.personnel['0'].lastName);
+            $('#editEmployeeEmail').val(data.personnel['0'].email);
+            $('#editEmployeeJobTitle').val(data.personnel['0'].jobTitle);
+            $('#editEmployeeDepartment').html(data.personnel['0'].departmentID);
+            $('#editEmployeeLocation').html(data.personnel['0'].location);
+            $("#Update-btn").attr("userID", data.personnel['0'].id);
             console.log(results, "update personnel")
 
 
@@ -764,7 +764,7 @@ $('#locUpdate-btn').on('click', event => {
 
 })
 
-//SEARCH BY NAME
+//SEARCH BY NAME/DEPARTMENT/LOCATION
 function searchPersonnel(event) {
     event.preventDefault();
 
