@@ -1,2 +1,13 @@
-/* Table Sizing */
 
+
+.table-responsive{
+    max-height: 500px;
+    
+}
+
+@media only screen and (max-width: 480px) {
+    #personnel-table {
+        padding: 0;
+        margin: 0;
+    }
+}

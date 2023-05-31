@@ -24,11 +24,12 @@ function populatePersonnelTable() {
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
                 
-                <td>${data[i].firstName}</td> 
-                <td>${data[i].lastName}</td>
-                <td>${data[i].department}</td> 
-                <td>${data[i].location}</td>
-                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                <td>${data[i].lastName + ',' + data[i].firstName}</td> 
+                <td class="d-none d-md-table-cell">${data[i].department}</td> 
+                <td class="d-none d-md-table-cell">${data[i].location}</td>
+                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button></td> 
+                <td> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button></td> 
+                <td> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
                 
                
                 </tr>`;
@@ -66,7 +67,8 @@ function populateDepartmentTable() {
                 tr += `<tr>
                 <td>${data[i].name}</td>
                 <td>${data[i].location}</td>
-                <td><button  data-id="${data[i].id}"  onclick="departmentdependencies('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editdepartmentbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                <td><button  data-id="${data[i].id}"  onclick="departmentdependencies('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button></td>
+                <td><button onclick="editdepartmentbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
 
                     </tr>`;
 
@@ -100,7 +102,8 @@ function populateLocationTable() {
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
                 <td>${data[i].location}</td>
-                <td><button data-id="${data[i].locationID}" onclick="locationdependencies('${data[i].locationID}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editlocationbyId('${data[i].locationID}')"class="btn btn fa  fa-pen custom-button"></button></td>
+                <td><button data-id="${data[i].locationID}" onclick="locationdependencies('${data[i].locationID}')" class="btn btn fa  fa-trash custom-button"></button></td>
+                <td><button onclick="editlocationbyId('${data[i].locationID}')"class="btn btn fa  fa-pen custom-button"></button></td>
 
                     </tr>`;
             };
@@ -399,23 +402,50 @@ function viewpersonnelbyid(personnelId) {
     });
 };
 
-//**DELETING PERSONNEL**//Deleting a personnel by ID
+
+//**DELETING PERSONNEL**//Getting a personnel's details by ID for deleting
 function deletepersonnelbyId(deleteId) {
 
     $('#confirmDeletion').modal('show');
 
-    $('#confirmDeletionButton').on('click', event => {
-
-
         $.ajax({
-            url: "./php/deletePersonnelByID.php",
+            url: "./php/getPersonnelByID.php",
             type: 'POST',
             dataType: 'json',
             data: {
                 id: deleteId,
             },
             success: function (result) {
-                //console.log(result, "delete personnel")
+                console.log(result, "delete personnel")
+
+                $('#confirmPersonnelName').html('Are you sure you would like to delete <b>' + result['data']['personnel'][0]['lastName']+ ', '
+                + result['data']['personnel'][0]['firstName'] + '</b> ?'); 
+                $('#confirmDeletionButton').val(result['data']['personnel'][0]['id']);
+                //console.log(result['data']['personnel'][0]['id']);
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                console.log(jqXHR, errorThrown);
+            },
+        });
+    
+};
+
+//**DELETING PERSONNEL**//Deleting a personnel by ID
+
+    $('#confirmDeletionButton').on('click', event => {
+
+        $.ajax({
+            url: "./php/deletePersonnelByID.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: $('#confirmDeletionButton').val(),
+            },
+            success: function (result) {
+                //console.log(result, "confirm delete personnel")
                 $('#confirmDeletion').modal('hide');
 
                 populatePersonnelTable();
@@ -427,7 +457,7 @@ function deletepersonnelbyId(deleteId) {
             },
         });
     })
-};
+
 
 //**UPDATING PERSONNEL**//Getting a personnel's details by ID for updating
 
@@ -521,21 +551,24 @@ function departmentdependencies(id) {
 
 
     $.ajax({
-        url: "./php/getDepartmentDependenciesByID.php",
+        url: "./php/getDepartmentDependencies.php",
         type: 'GET',
         dataType: 'json',
         data: {
             id,
         },
         success: function (result) {
-            //console.log(result, "department dependencies")
+            console.log(result, "department dependencies")
 
-            if (result.data[0].employees == 0) {
+            if (result.data[0].departmentCount == 0) {
 
                 $('#departmentDeletionButton').val(id);
                 $('#departmentDeletion').modal('show');
+                $('#confirmDepartmentName').text(result['data'][0]['departmentName']); 
             } else {
                 $('#nodepartmentDeletion').modal('show');
+                $('#confirmDepartmentCount').text(result['data'][0]['departmentName']); 
+                $("#pc").text(result['data'][0]['departmentCount']);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -562,7 +595,7 @@ function deletedepartmentbyId() {
             id: $('#departmentDeletionButton').val()
         },
         success: function (result) {
-            //console.log(result, "delete department")
+            console.log(result, "delete department")
             $('#departmentDeletion').modal('hide');
 
             populateDepartmentTable();

@@ -9,12 +9,12 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
-	<!-- My Stylesheet -->
-	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 	<!-- Fontawesome -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome-free-5.15.4-web/css/all.css">
 	<!-- Favicon-->
 	<link rel="icon" type="image/x-icon" href="./favicon.ico">
+	<!-- My Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 
 
 </head>
@@ -40,8 +40,8 @@
 
 				</ul>
 				<form class="d-flex" onsubmit="searchPersonnel(event)">
-					<input class="form-control me-2 search-field" type="search" placeholder="Search"
-						aria-label="Search" id="searchBy">
+					<input class="form-control me-2 search-field" type="search" placeholder="Search" aria-label="Search"
+						id="searchBy">
 					<!--<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
 						<option selected value="">Search by department</option>
 					</select>
@@ -190,13 +190,13 @@
 		<!-- End of Add Location Modal -->
 
 		<!-- Table Nav Tabs -->
-		<ul id="NavTab" class="nav nav-tabs nav-pills nav-fill " role="tablist">
-			<li class="nav-item flex-fill">
+		<ul id="NavTab" class="nav nav-tabs nav-pills" role="tablist">
+			<li class="nav-item">
 				<button class="nav-link active" id="navPersonnel" data-bs-toggle="pill" data-bs-target="#personnel-card"
 					type="button" role="tab" aria-controls="personnelcard" aria-selected="true"
 					title="personnel">Personnel</button>
 			</li>
-			<li class="nav-item flex-fill">
+			<li class="nav-item">
 				<button class="nav-link" id="navDepartments" data-bs-toggle="pill" data-bs-target="#department-card"
 					role="tab" aria-controls="department" aria-selected="false" title="department">Departments</button>
 			</li>
@@ -234,25 +234,26 @@
 				<h5 class="card-header text-white bg-primary">Personnel</h5>
 				<div class="card-body">
 					<div class="table-responsive">
-					<table id="personnel-table" class="table table-striped table-hover table-bordered">
-						<thead>
-							<tr">
-								<!--<th scope="col">ID</th>-->
-								<th scope="col">First Name</th>
-								<th scope="col">Last Name</th>
-								<!--<th scope="col" class="d-none d-md-table-cell">Email</th>-->
-								<th scope="col">Department</th>
-								<th scope="col">Location</th>
-								<th>Actions</th>
-								</tr>
-						</thead>
-						<tbody id=personnel-table-body>
-							<tr>
+						<table id="personnel-table" class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr">
+									<!--<th scope="col">ID</th>-->
+									<th scope="col">Full Name</th>
+									<!--<th scope="col">Last Name</th>-->
+									<th class="d-none d-md-table-cell" scope="col">Department</th>
+									<th class="d-none d-md-table-cell" scope="col">Location</th>
+									<th>Read</th>
+									<th>Delete</th>
+									<th>Update</th>
+									</tr>
+							</thead>
+							<tbody id=personnel-table-body>
+								<tr>
 
-							</tr>
-						</tbody>
-					</table>
-				</div>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<!--<div class="card-footer">
@@ -267,23 +268,24 @@
 				<h5 class="card-header bg-primary text-white">Departments</h5>
 				<div class="card-body">
 					<div class="table-responsive">
-					<table id="department-table" class="table table-striped table-hover table-bordered">
-						<thead>
-							<tr>
-								<!--<th class="id" scope="col">ID</th>-->
-								<th scope="col">Department</th>
-								<th scope="col">Location</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody id=department-table-body>
-							<tr>
+						<table id="department-table" class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<!--<th class="id" scope="col">ID</th>-->
+									<th scope="col">Department</th>
+									<th scope="col">Location</th>
+									<th>Delete</th>
+									<th>Update</th>
+								</tr>
+							</thead>
+							<tbody id=department-table-body>
+								<tr>
 
-							</tr>
+								</tr>
 
-						</tbody>
-					</table>
-				</div>
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 			</div>
@@ -295,21 +297,22 @@
 				<h5 class="card-header bg-primary text-white">Locations</h5>
 				<div class="card-body">
 					<div class="table-responsive">
-					<table id="location-table" class="table table-striped table-hover table-bordered">
-						<thead>
-							<tr>
-								<!--<th class="id" scope="col">ID</th>-->
-								<th scope="col">Location</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody id="location-table-body">
-							<tr>
+						<table id="location-table" class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<!--<th class="id" scope="col">ID</th>-->
+									<th scope="col">Location</th>
+									<th>Delete</th>
+									<th>Update</th>
+								</tr>
+							</thead>
+							<tbody id="location-table-body">
+								<tr>
 
-							</tr>
-						</tbody>
-					</table>
-				</div>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 			</div>
@@ -386,8 +389,7 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Do you really want to delete this personnel<span
-									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+							<p class="fs-5 text-center"><span id="confirmPersonnelName"></span><br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button id="confirmDeletionButton" type="button" class="btn btn-primary btn">Delete</button>
@@ -412,8 +414,8 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Do you really want to delete this department<span
-									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+							<p class="fs-5 text-center">Are you sure you would like to delete <span
+									id="confirmDepartmentName" class="fw-bold"></span>?<br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button onclick="deletedepartmentbyId()" id="departmentDeletionButton" type="button"
@@ -434,8 +436,7 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Deletion has been unsuccessful<span
-									id="confirmDeletionName"></span>.<br>There are personnel dependencies.</p>
+							<p class="fs-5 text-center">You cannot remove the entry for <span id="confirmDepartmentCount" class="fw-bold"></span> because it has <span id="pc" class="fw-bold"></span> employees assigned to it.</p>
 						</div>
 						<!--<div class="modal-footer justify-content-center">
 							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
@@ -550,6 +551,7 @@
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button id="Update-btn" type="submit" class="btn btn-primary">Update</button>
+							<button type="button" class="btn btn-secondary myBtn" data-bs-dismiss="modal">Cancel</button>
 						</div>
 
 					</div>
@@ -590,6 +592,7 @@
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button id="depUpdate-btn" type="submit" class="btn btn-primary">Update</button>
+							<button type="button" class="btn btn-secondary myBtn" data-bs-dismiss="modal">Cancel</button>
 						</div>
 
 					</div>
@@ -624,6 +627,7 @@
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button id="locUpdate-btn" type="submit" class="btn btn-primary">Update</button>
+							<button type="button" class="btn btn-secondary myBtn" data-bs-dismiss="modal">Cancel</button>
 						</div>
 
 					</div>
@@ -669,6 +673,8 @@
 	<script src="./bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="./fontawesome-free-5.15.4-web/js/fontawesome.min.js"></script>
 	<script src="./jquery/jquery-3.5.1.min.js" type="application/javascript"></script>
+
+	<!-- Main JS -->
 	<script src="./js/main.js"></script>
 
 </body>
