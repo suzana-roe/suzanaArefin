@@ -622,13 +622,16 @@ function locationdependencies(id) {
             id,
         },
         success: function (result) {
-            //console.log(result, "location dependencies")
+            console.log(result, "location dependencies")
 
-            if (result.data[0].departments == 0) {
+            if (result.data[0].locationCount == 0) {
                 $('#locationDeletionButton').val(id);
                 $('#locationDeletion').modal('show');
+                $('#confirmLocationName').text(result['data'][0]['locationName']); 
             } else {
                 $('#nolocationDeletion').modal('show');
+                $('#confirmLocationCount').text(result['data'][0]['locationName']); 
+                $("#lc").text(result['data'][0]['locationCount']);
             }
             console.log($('#locationDeletionButton').val());
         },

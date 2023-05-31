@@ -461,8 +461,8 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Do you really want to delete this location<span
-									id="confirmDeletionName"></span>?<br>This action cannot be undone.</p>
+							<p class="fs-5 text-center">Are you sure you would like to delete <span
+									id="confirmLocationName" class="fw-bold"></span>?<br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
 							<button onclick="deletelocationbyId()" id="locationDeletionButton" type="button"
@@ -484,8 +484,7 @@
 						</div>
 						<div class="modal-body">
 							<div id="deletionFeedback" class="feedbackMessage"></div>
-							<p class="fs-5 text-center">Deletion has been unsuccessful<span
-									id="confirmDeletionName"></span>.<br>There are department dependencies.</p>
+							<p class="fs-5 text-center">You cannot remove the entry for <span id="confirmLocationCount" class="fw-bold"></span> because it has <span id="lc" class="fw-bold"></span> departments assigned to it.</p>
 						</div>
 						<!--<div class="modal-footer justify-content-center">
 							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
