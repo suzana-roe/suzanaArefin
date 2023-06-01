@@ -171,6 +171,10 @@ $("#searchByDepartment").click(function () {
     populateDepartmentlist()
 });
 
+$("#home-btn").click(function () {
+    populatePersonnelTable()
+});
+
 //Generating Location list for add personnel and add/edit department modals
 function populateLocationlist() {
 
@@ -481,10 +485,10 @@ function editpersonnelbyId(editId) {
             $('#editEmployeeLastName').val(data.personnel['0'].lastName);
             $('#editEmployeeEmail').val(data.personnel['0'].email);
             $('#editEmployeeJobTitle').val(data.personnel['0'].jobTitle);
-            $('#editEmployeeDepartment').html(data.personnel['0'].departmentID);
-            $('#editEmployeeLocation').html(data.personnel['0'].location);
+            $('#editEmployeeDepartment').val(data.personnel['0'].departmentID);
+            $('#editEmployeeLocation').val(data.personnel['0'].location);
             $("#Update-btn").attr("userID", data.personnel['0'].id);
-            //console.log(results, "update personnel")
+            console.log(results, "update personnel")
 
 
 
@@ -580,7 +584,8 @@ function departmentdependencies(id) {
 };
 
 //**DELETING DEPARTMENT**//Confirming deleting a department by ID
-function deletedepartmentbyId() {
+//function deletedepartmentbyId() {
+$('#departmentDeletionButton').on('click', event => {
 
     /*$('#departmentDeletionButton').on('click', event => {
         console.log($('#departmentDeletionButton').val())*/
@@ -608,7 +613,7 @@ function deletedepartmentbyId() {
     });
     //})
 
-};
+})
 
 
 //**DELETING LOCATION**//Getting department dependencies for DELETING location by ID
@@ -644,7 +649,7 @@ function locationdependencies(id) {
 };
 
 //**DELETING LOCATION**//Confirming deleting a location by ID
-function deletelocationbyId() {
+$('#locationDeletionButton').on('click', event => {
 
     console.log($('#locationDeletionButton').val());
 
@@ -656,7 +661,7 @@ function deletelocationbyId() {
             id: $('#locationDeletionButton').val()
         },
         success: function (result) {
-            //console.log(result, "delete location")
+            console.log(result, "delete location")
             $('#locationDeletion').modal('hide');
 
             populateLocationTable();
@@ -668,7 +673,7 @@ function deletelocationbyId() {
         },
     });
 
-};
+})
 
 //**UPDATING DEPARTMENT**//Getting a department's details by ID for updating
 function editdepartmentbyId(depId) {
@@ -801,7 +806,7 @@ $('#locUpdate-btn').on('click', event => {
 })
 
 //SEARCH BY NAME/DEPARTMENT/LOCATION
-function searchPersonnel(event) {
+$('#searchPersonnel').on('click', event => {
     event.preventDefault();
 
     $.ajax({
@@ -815,7 +820,7 @@ function searchPersonnel(event) {
             firstName: $('#searchBy').val(),
         },
         success: function (result) {
-            //console.log(result, 'search')
+            console.log(result, 'search')
             let data = result["data"];
             let tr = ``;
 
@@ -841,7 +846,7 @@ function searchPersonnel(event) {
             console.log(jqXHR, errorThrown);
         },
     });
-}
+})
 
 
 

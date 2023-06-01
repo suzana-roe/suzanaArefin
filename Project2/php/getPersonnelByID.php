@@ -36,6 +36,8 @@
 	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
 	$query = $conn->prepare('SELECT `id`, `firstName`, `lastName`, `email`, `jobTitle`, `departmentID` FROM `personnel` WHERE `id` = ?');
+	//$query = $conn->prepare('SELECT p.id, p.firstName, p.lastName, p.email, p.jobTitle, p.departmentID, d.name FROM personnel p LEFT JOIN department d on (d.id = p.departmentID) WHERE p.id = ?');
+
 
 	$query->bind_param("i", $_REQUEST['id']);
 

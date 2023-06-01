@@ -34,12 +34,12 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" onclick="populatePersonnelTable()"
+						<a class="nav-link active" aria-current="page" id="home-btn"
 							href="#">Home</a>
 					</li>
 
 				</ul>
-				<form class="d-flex" onsubmit="searchPersonnel(event)">
+				<form class="d-flex" id="searchPersonnel">
 					<input class="form-control me-2 search-field" type="search" placeholder="Search" aria-label="Search"
 						id="searchBy">
 					<!--<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
@@ -418,7 +418,7 @@
 									id="confirmDepartmentName" class="fw-bold"></span>?<br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
-							<button onclick="deletedepartmentbyId()" id="departmentDeletionButton" type="button"
+							<button id="departmentDeletionButton" type="button"
 								class="btn btn-primary btn">Delete</button>
 						</div>
 					</div>
@@ -465,7 +465,7 @@
 									id="confirmLocationName" class="fw-bold"></span>?<br>This action cannot be undone.</p>
 						</div>
 						<div class="modal-footer justify-content-center">
-							<button onclick="deletelocationbyId()" id="locationDeletionButton" type="button"
+							<button id="locationDeletionButton" type="button"
 								class="btn btn-primary btn">Delete</button>
 						</div>
 					</div>
