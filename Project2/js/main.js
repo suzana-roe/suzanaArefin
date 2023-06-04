@@ -420,7 +420,7 @@ function deletepersonnelbyId(deleteId) {
                 id: deleteId,
             },
             success: function (result) {
-                console.log(result, "delete personnel")
+                //console.log(result, "delete personnel")
 
                 $('#confirmPersonnelName').html('Are you sure you would like to delete <b>' + result['data']['personnel'][0]['lastName']+ ', '
                 + result['data']['personnel'][0]['firstName'] + '</b> ?'); 
@@ -490,7 +490,7 @@ function editpersonnelbyId(editId) {
             $('#editEmployeeDepartment').val(data.personnel['0'].departmentID);
             $('#editEmployeeLocation').val(data.personnel['0'].location);
             
-            console.log(results, "update personnel")
+            //console.log(results, "update personnel")
 
 
 
@@ -564,7 +564,7 @@ function departmentdependencies(id) {
             id,
         },
         success: function (result) {
-            console.log(result, "department dependencies")
+            //console.log(result, "department dependencies")
 
             if (result.data[0].departmentCount == 0) {
 
@@ -602,7 +602,7 @@ $('#departmentDeletionButton').on('click', event => {
             id: $('#departmentDeletionButton').val()
         },
         success: function (result) {
-            console.log(result, "delete department")
+            //console.log(result, "delete department")
             $('#departmentDeletion').modal('hide');
 
             populateDepartmentTable();
@@ -629,7 +629,7 @@ function locationdependencies(id) {
             id,
         },
         success: function (result) {
-            console.log(result, "location dependencies")
+            //console.log(result, "location dependencies")
 
             if (result.data[0].locationCount == 0) {
                 $('#locationDeletionButton').val(id);
@@ -640,7 +640,7 @@ function locationdependencies(id) {
                 $('#confirmLocationCount').text(result['data'][0]['locationName']); 
                 $("#lc").text(result['data'][0]['locationCount']);
             }
-            console.log($('#locationDeletionButton').val());
+            //console.log($('#locationDeletionButton').val());
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
@@ -653,7 +653,7 @@ function locationdependencies(id) {
 //**DELETING LOCATION**//Confirming deleting a location by ID
 $('#locationDeletionButton').on('click', event => {
 
-    console.log($('#locationDeletionButton').val());
+    //console.log($('#locationDeletionButton').val());
 
     $.ajax({
         url: "./php/deleteLocationByID.php",
@@ -663,7 +663,7 @@ $('#locationDeletionButton').on('click', event => {
             id: $('#locationDeletionButton').val()
         },
         success: function (result) {
-            console.log(result, "delete location")
+            //console.log(result, "delete location")
             $('#locationDeletion').modal('hide');
 
             populateLocationTable();
@@ -826,19 +826,19 @@ $('#searchPersonnel').on('click', event => {
             firstName: $('#searchBy').val(),
         },
         success: function (result) {
-            console.log(result, 'search')
+            //console.log(result, 'search')
             let data = result["data"];
             let tr = ``;
 
 
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
-                <td>${data[i].firstName}</td> 
-                <td>${data[i].lastName}</td>
-                <td>${data[i].department}</td> 
-                <td>${data[i].location}</td>
-                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
-                
+                <td>${data[i].lastName + ',' + data[i].firstName}</td> 
+                <td class="d-none d-md-table-cell">${data[i].department}</td> 
+                <td class="d-none d-md-table-cell">${data[i].location}</td>
+                <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button></td> 
+                <td> <button onclick="deletepersonnelbyId('${data[i].id}')" class="btn btn fa  fa-trash custom-button"></button></td> 
+                <td> <button onclick="editpersonnelbyId('${data[i].id}')"class="btn btn fa  fa-pen custom-button"></button></td>
                
                 </tr>`;
             };
