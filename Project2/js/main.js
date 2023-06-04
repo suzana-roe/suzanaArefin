@@ -479,6 +479,8 @@ function editpersonnelbyId(editId) {
         success: function (results) {
 
             const data = results["data"]
+
+            $('#editEmployeeId').val(data.personnel['0'].id);
             
 
             $('#editEmployeeFirstName').val(data.personnel['0'].firstName);
@@ -487,7 +489,7 @@ function editpersonnelbyId(editId) {
             $('#editEmployeeJobTitle').val(data.personnel['0'].jobTitle);
             $('#editEmployeeDepartment').val(data.personnel['0'].departmentID);
             $('#editEmployeeLocation').val(data.personnel['0'].location);
-            $("#Update-btn").attr("userID", data.personnel['0'].id);
+            
             console.log(results, "update personnel")
 
 
@@ -527,7 +529,7 @@ $('#Update-btn').on('click', event => {
             email: $('#editEmployeeEmail').val(),
             jobTitle: $('#editEmployeeJobTitle').val(),
             departmentID: $('#editEmployeeDepartment').val(),
-            id: $("#Update-btn").attr("userID")
+            id: $('#editEmployeeId').val(),
         },
         success: function (result) {
             //console.log(result, "confirm edit personnel")
@@ -689,9 +691,11 @@ function editdepartmentbyId(depId) {
         },
         success: function (result) {
 
+            $('#editDepartmentId').val(result['data'][0]['id']);
+
             $('#editDepartmentName').val(result['data'][0]['name']);
             $('#editDepartmentLocationSelect').val(result['data'][0]['locationID']);
-            $('#depUpdate-btn').val(result['data'][0]['id']);
+            
 
 
             //console.log(result, "update department")
@@ -719,7 +723,7 @@ $('#depUpdate-btn').on('click', event => {
         data: {
             name: $('#editDepartmentName').val(),
             locationID: $('#editDepartmentLocationSelect').val(),
-            id: $('#depUpdate-btn').val(),
+            id: $('#editDepartmentId').val(),
         },
         success: function (result) {
             //console.log(result, "confirm update department")
@@ -754,8 +758,10 @@ function editlocationbyId(locId) {
         },
         success: function (result) {
 
+            $('#editLocationId').val(result['data'][0]['id'])
+
             $('#editLocationName').val(result['data'][0]['name']);
-            $('#locUpdate-btn').val(result['data'][0]['id'])
+           
 
 
 
@@ -782,7 +788,7 @@ $('#locUpdate-btn').on('click', event => {
         dataType: 'json',
         data: {
             name: $('#editLocationName').val(),
-            id: $('#locUpdate-btn').val(),
+            id: $('#editLocationId').val(),
         },
         success: function (result) {
             //console.log(result, "confirm update location")
