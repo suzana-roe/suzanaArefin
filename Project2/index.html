@@ -42,12 +42,6 @@
 				<form class="d-flex" id="searchPersonnel">
 					<input class="form-control me-2 search-field" type="search" placeholder="Search" aria-label="Search"
 						id="searchBy">
-					<!--<select class="form-select me-2 search-field departmentList" id="searchByDepartment">
-						<option selected value="">Search by department</option>
-					</select>
-					<select class="form-select me-2 search-field locationList" id="searchByLocation">
-						<option selected value="">Search by location</option>
-					</select>-->
 					<button class="btn btn-outline-light" type="submit">Search</button>
 				</form>
 			</div>
@@ -111,7 +105,6 @@
 						</form>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
 						<button type="button" class="btn btn-primary" id="submit-btn">Add</button>
 					</div>
 				</div>
@@ -148,7 +141,6 @@
 							</div>
 						</div>
 						<div class="modal-footer justify-content-center">
-							<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
 							<button type="submit" class="btn btn-primary" id="dep-submit-btn">Add</button>
 						</div>
 					</form>
@@ -180,7 +172,6 @@
 							</div>
 						</div>
 						<div class="modal-footer justify-content-center">
-							<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
 							<button type="submit" class="btn btn-primary" id="loc-submit-btn">Add</button>
 						</div>
 					</form>
@@ -237,9 +228,7 @@
 						<table id="personnel-table" class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr">
-									<!--<th scope="col">ID</th>-->
 									<th scope="col">Full Name</th>
-									<!--<th scope="col">Last Name</th>-->
 									<th class="d-none d-md-table-cell" scope="col">Department</th>
 									<th class="d-none d-md-table-cell" scope="col">Location</th>
 									<th>Read</th>
@@ -256,9 +245,7 @@
 					</div>
 				</div>
 			</div>
-			<!--<div class="card-footer">
-					<small class="text-muted updated"></small>
-				</div>-->
+			
 
 			<!-- End of Personnel Table Card-->
 
@@ -271,7 +258,6 @@
 						<table id="department-table" class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									<!--<th class="id" scope="col">ID</th>-->
 									<th scope="col">Department</th>
 									<th scope="col">Location</th>
 									<th>Delete</th>
@@ -300,7 +286,6 @@
 						<table id="location-table" class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									<!--<th class="id" scope="col">ID</th>-->
 									<th scope="col">Location</th>
 									<th>Delete</th>
 									<th>Update</th>
@@ -332,13 +317,8 @@
 						</div>
 						<form id="userSelectModalForm">
 							<div class="modal-body">
-								<!-- View user Form -->
+								<!-- View Personnel Form -->
 								<div class="container">
-									<!--<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="user_id" placeholder="ID" disabled
-											readonly>
-										<label for="ID">ID:</label>
-									</div>-->
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_firstName"
 											placeholder="First Name" disabled readonly>
@@ -354,11 +334,7 @@
 											placeholder="Job Title" disabled readonly>
 										<label for="user_jobTitle">Job Title:</label>
 									</div>
-									<!--<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="user_department"
-											placeholder="Department" disabled readonly>
-										<label for="user_department">Department:</label>
-									</div>-->
+								
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="user_email" placeholder="Email"
 											disabled readonly>
@@ -366,10 +342,7 @@
 									</div>
 								</div>
 							</div>
-							<!--<div class="modal-footer justify-content-center">
-								<button type="submit" class="btn btn-primary">Update</button>
-								<button type="submit" class="btn btn-primary">Delete</button>
-							</div>-->
+							
 						</form>
 					</div>
 				</div>
@@ -438,9 +411,7 @@
 							<div id="deletionFeedback" class="feedbackMessage"></div>
 							<p class="fs-5 text-center">You cannot remove the entry for <span id="confirmDepartmentCount" class="fw-bold"></span> because it has <span id="pc" class="fw-bold"></span> employees assigned to it.</p>
 						</div>
-						<!--<div class="modal-footer justify-content-center">
-							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
-						</div>-->
+						
 					</div>
 				</div>
 			</div>
@@ -486,9 +457,7 @@
 							<div id="deletionFeedback" class="feedbackMessage"></div>
 							<p class="fs-5 text-center">You cannot remove the entry for <span id="confirmLocationCount" class="fw-bold"></span> because it has <span id="lc" class="fw-bold"></span> departments assigned to it.</p>
 						</div>
-						<!--<div class="modal-footer justify-content-center">
-							<button id="departmentDeletionButton" type="button" class="btn btn-primary btn">Close</button>
-						</div>-->
+						
 					</div>
 				</div>
 			</div>
@@ -502,9 +471,6 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header bg-primary text-light">
-							<!--<h4 class="fs-4 text-center modal-title w-100"><span id="editEmployeeFirstNameLabel"></span>
-								<span id="editEmployeeLastNameLabel"></span>
-							</h4>-->
 							<h4 class="fs-4 text-center modal-title w-100">Update Personnel</h4>
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
@@ -561,7 +527,6 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header bg-primary text-light">
-							<!--<h4 class="fs-4 text-center modal-title w-100"><span id="editDepartmentLabel"></span></h4>-->
 							<h4 class="fs-4 text-center modal-title w-100">Update Department</h4>
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
@@ -578,7 +543,7 @@
 								<div class="form-floating mb-3">
 									<select class="form-select locationSelect"
 										id="editDepartmentLocationSelect"></select>
-									<!-- Dynamically Populated -->
+									<!-- Location Dropdown List -->
 									<label for="editDepartmentLocationSelect">Location</label>
 								</div>
 								<input type="hidden" id="editDepartmentId">
@@ -602,7 +567,6 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header bg-primary text-light">
-							<!--<h4 class="fs-4 text-center modal-title w-100"><span id="editLocationLabel"></span></h4>-->
 							<h4 class="fs-4 text-center modal-title w-100">Update Location</h4>
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
 								aria-label="Close"></button>
