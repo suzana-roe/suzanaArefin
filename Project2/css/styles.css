@@ -1,9 +1,18 @@
 body {
     margin-left: -10px;
     margin-right: -10px;
+    
 }
 
 .table-responsive {
     max-height: 500px;
 
 }
+
+thead {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+

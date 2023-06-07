@@ -423,7 +423,7 @@ function deletepersonnelbyId(deleteId) {
                 //console.log(result, "delete personnel")
 
                 $('#confirmPersonnelName').html('Are you sure you would like to delete <b>' + result['data']['personnel'][0]['lastName']+ ', '
-                + result['data']['personnel'][0]['firstName'] + '</b> ?'); 
+                + result['data']['personnel'][0]['firstName'] + '</b>?'); 
                 $('#confirmDeletionButton').val(result['data']['personnel'][0]['id']);
                 //console.log(result['data']['personnel'][0]['id']);
 
