@@ -24,7 +24,7 @@ function populatePersonnelTable() {
             for (let i = 0; i < data.length; i++) {
                 tr += `<tr>
                 
-                <td>${data[i].lastName + ',' + data[i].firstName}</td> 
+                <td>${data[i].lastName.trim() + ',' + data[i].firstName}</td> 
                 <td class="d-none d-md-table-cell">${data[i].department}</td> 
                 <td class="d-none d-md-table-cell">${data[i].location}</td>
                 <td> <button onclick="viewpersonnelbyid('${data[i].id}')" class="btn btn fa  fa-eye custom-button"></button></td> 
