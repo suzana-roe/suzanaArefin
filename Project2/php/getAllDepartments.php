@@ -1,12 +1,6 @@
 <?php
 
-	// example use from browser
-	// http://localhost/companydirectory/libs/php/getAllDepartments.php
 
-	// remove next two lines for production	
-	
-	//ini_set('display_errors', 'On');
-	//error_reporting(E_ALL);
 
 	$executionStartTime = microtime(true);
 
@@ -32,7 +26,7 @@
 
 	}	
 
-	// SQL does not accept parameters and so is not prepared
+
 
 	$query = 'SELECT d.id, d.name, d.locationID, l.name as location FROM department d LEFT JOIN location l ON (l.id = d.locationID) GROUP BY name';
 

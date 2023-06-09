@@ -24,7 +24,7 @@
 
 	}	
 
-	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+
 
 	$query = $conn->prepare('INSERT INTO personnel (firstName, lastName, email, jobTitle, departmentID) VALUES(?,?,?,?,?)');
 
