@@ -4,25 +4,26 @@ body {
     
 }
 
-.table-responsive {
-    max-height: 500px;
-}
-
-thead {
+#header {
     position: sticky;
     top: 0;
-    background: white;
+}
 
+#tableHead {
+    position: sticky;
+    top: 0;
 }
 
 thead th {
-    border-style: hidden;
+    background-color: white;
 }
 
-/*#tableHead {
+thead th{
     position: sticky;
     top: 0;
-}*/
+    border-style: hidden;
+    background-color: white !important;
+}
 
 table tbody {
     border-style: hidden;
