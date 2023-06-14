@@ -9,6 +9,11 @@ body {
     top: 0;
 }
 
+#NavHeader {
+    position: sticky;
+    top: 5em;
+}
+
 #tableHead {
     position: sticky;
     top: 0;
