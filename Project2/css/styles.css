@@ -1,29 +1,32 @@
 body {
     margin-left: -10px;
     margin-right: -10px;
-    
 }
 
 #header {
     position: sticky;
     top: 0;
+    z-index: 99;
 }
 
 #NavHeader {
     position: sticky;
     top: 5em;
+    z-index: 99;
 }
 
 #tableHead {
     position: sticky;
-    top: 0;
+    padding-top: 0;
+    top: 9em;
+    z-index: 99;
 }
 
 thead th {
     background-color: white;
 }
 
-thead th{
+thead th {
     position: sticky;
     top: 0;
     border-style: hidden;
@@ -32,6 +35,10 @@ thead th{
 
 table tbody {
     border-style: hidden;
+    z-index: 1;
 }
+
+
+
 
 
